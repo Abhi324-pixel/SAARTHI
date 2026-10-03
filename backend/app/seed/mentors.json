@@ -1,0 +1,28 @@
+{
+  "mentors": [
+    {"id": "mock_sm_ananya", "name": "Ananya Rao", "tier": "skill_mentor",
+     "headline": "Backend engineer, 6 years in fintech", "bio": "Builds payment APIs in Python and PostgreSQL. Loves untangling JOIN and aggregation bugs.",
+     "expertise": ["sql", "sql_inner_join", "sql_outer_join", "sql_multi_table", "sql_group_by", "sql_having", "sql_subqueries", "rest_apis", "fastapi_basics", "py_db_access"],
+     "languages": ["english", "hinglish"], "availability": ["Mon 18:00", "Wed 20:00", "Sat 11:00"], "verification_status": "verified", "active_case_cap": 3},
+    {"id": "mock_sm_vikram", "name": "Vikram Singh", "tier": "skill_mentor",
+     "headline": "Final-year student mentor, SQL and databases", "bio": "Teaching assistant for the databases course. Explains in simple Hindi and English.",
+     "expertise": ["sql", "sql_select", "sql_filtering", "sql_null", "sql_aggregates", "sql_group_by", "sql_inner_join", "sql_outer_join", "sql_normalization"],
+     "languages": ["hindi", "hinglish", "english"], "availability": ["Tue 19:00", "Thu 19:00", "Sun 10:00"], "verification_status": "verified", "active_case_cap": 4},
+    {"id": "mock_sm_zoya", "name": "Zoya Khan", "tier": "skill_mentor",
+     "headline": "Data engineer, indexes and transactions", "bio": "Works on query performance and data pipelines.",
+     "expertise": ["sql", "sql_indexes", "sql_transactions", "sql_dml", "sql_multi_table", "py_db_access", "docker_basics", "http_basics"],
+     "languages": ["english", "hinglish"], "availability": ["Fri 17:00", "Sat 15:00"], "verification_status": "verified", "active_case_cap": 3},
+    {"id": "mock_mg_rajesh", "name": "Rajesh Kumar", "tier": "margdarshak",
+     "headline": "Retired bank manager, 34 years in public-sector banking", "bio": "Guides students on career choices, interview conduct and steady study habits.",
+     "expertise": ["career", "interview", "discipline", "motivation", "banking"],
+     "languages": ["hindi", "hinglish", "english"], "availability": ["Mon 11:00", "Thu 11:00", "Sat 09:00"], "verification_status": "verified", "active_case_cap": 4},
+    {"id": "mock_mg_sunita", "name": "Sunita Verma", "tier": "margdarshak",
+     "headline": "Retired IT project manager (telecom PSU)", "bio": "Helps first-generation graduates with resumes, interviews and choosing a tech track.",
+     "expertise": ["career", "interview", "resume", "tech_careers", "communication"],
+     "languages": ["hindi", "english"], "availability": ["Tue 11:00", "Fri 11:00"], "verification_status": "verified", "active_case_cap": 3},
+    {"id": "mock_mg_mohan", "name": "Dr. Mohan Lal", "tier": "margdarshak",
+     "headline": "Retired space-agency scientist, 28 years", "bio": "Mentors on engineering careers, perseverance and how to study for the long run.",
+     "expertise": ["career", "motivation", "discipline", "engineering", "study_habits"],
+     "languages": ["hindi", "english"], "availability": ["Wed 16:00", "Sun 16:00"], "verification_status": "verified", "active_case_cap": 3}
+  ]
+}
