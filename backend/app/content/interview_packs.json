@@ -1,0 +1,71 @@
+{
+  "version": "0.1-ai-drafted-pending-review",
+  "packs": [
+    {
+      "id": "services_fresher",
+      "title": "IT Services Fresher",
+      "title_hi": "IT Services Fresher",
+      "description": "Standard entry-level fresher interview for mass recruiters and IT consulting services. Balanced between personal communication, teamwork STAR stories, and core database basics.",
+      "target_company_type": "IT Services & Consulting",
+      "rounds": {
+        "behavioural": {
+          "concept_ids": ["comm_self_intro", "comm_star_story"],
+          "n": 2
+        },
+        "technical": {
+          "concept_ids": ["sql_inner_join", "sql_group_by"],
+          "n": 2
+        }
+      },
+      "concept_ids": ["comm_self_intro", "comm_star_story", "sql_inner_join", "sql_group_by"],
+      "duration_minutes": 25,
+      "reviewed": false,
+      "source": "Curated fresher interview patterns",
+      "reviewed_by": "Pending Margdarshak review"
+    },
+    {
+      "id": "product_junior",
+      "title": "Product Startup Junior Backend",
+      "title_hi": "Product Startup Junior Backend",
+      "description": "Rigorous technical and behavioural assessment for high-ownership product teams. Focuses on system architecture, database performance trade-offs, and critical bug resolution.",
+      "target_company_type": "Product & Growth Startups",
+      "rounds": {
+        "behavioural": {
+          "concept_ids": ["comm_self_intro", "comm_project_walkthrough", "comm_star_story"],
+          "n": 3
+        },
+        "technical": {
+          "concept_ids": ["sql_indexes", "sql_transactions"],
+          "n": 2
+        }
+      },
+      "concept_ids": ["comm_self_intro", "comm_project_walkthrough", "comm_star_story", "sql_indexes", "sql_transactions"],
+      "duration_minutes": 35,
+      "reviewed": false,
+      "source": "Curated junior backend engineer interview blueprints",
+      "reviewed_by": "Pending Margdarshak review"
+    },
+    {
+      "id": "internship",
+      "title": "College Engineering Internship",
+      "title_hi": "College Engineering Internship",
+      "description": "Focused interview for pre-final and final-year students. Emphasizes learning ability, academic or self-directed project execution, and fundamental SQL queries.",
+      "target_company_type": "Internships & Trainee Roles",
+      "rounds": {
+        "behavioural": {
+          "concept_ids": ["comm_self_intro", "comm_project_walkthrough"],
+          "n": 2
+        },
+        "technical": {
+          "concept_ids": ["sql_outer_join"],
+          "n": 1
+        }
+      },
+      "concept_ids": ["comm_self_intro", "comm_project_walkthrough", "sql_outer_join"],
+      "duration_minutes": 20,
+      "reviewed": false,
+      "source": "Curated campus placement internship blueprints",
+      "reviewed_by": "Pending Margdarshak review"
+    }
+  ]
+}

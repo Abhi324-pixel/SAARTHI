@@ -1,0 +1,22 @@
+{
+  "version": "1-ai-drafted-pending-review",
+  "note": "AI-drafted code of conduct. The safeguarding lead must review and sign off the wording (English and Hindi) before real mentors accept it.",
+  "promises": [
+    {"id": "respect", "en": "I will treat every learner with respect and patience.",
+     "hi": "मैं हर सीखने वाले के साथ सम्मान और धैर्य से पेश आऊँगा/आऊँगी।"},
+    {"id": "inside_app", "en": "I will keep every conversation inside SAARTHI. I will not share or ask for phone numbers, e-mail addresses or social-media handles, and I will not arrange meetings outside the app.",
+     "hi": "मैं हर बातचीत SAARTHI के अंदर ही रखूँगा/रखूँगी। मैं फ़ोन नंबर, ईमेल या सोशल-मीडिया आईडी न माँगूँगा/माँगूँगी, न दूँगा/दूँगी, और ऐप के बाहर मुलाक़ात तय नहीं करूँगा/करूँगी।"},
+    {"id": "no_gifts", "en": "I will not ask for or accept money, gifts or favours from learners or their families.",
+     "hi": "मैं सीखने वालों या उनके परिवारों से पैसे, उपहार या कोई एहसान न माँगूँगा/माँगूँगी, न स्वीकार करूँगा/करूँगी।"},
+    {"id": "assume_minor", "en": "I will treat every learner as a possible minor and keep my language and behaviour appropriate for a young person.",
+     "hi": "मैं हर सीखने वाले को संभावित नाबालिग मानूँगा/मानूँगी और अपनी भाषा और व्यवहार किसी युवा के अनुकूल रखूँगा/रखूँगी।"},
+    {"id": "report_concerns", "en": "If a learner tells me something that worries me about their safety or wellbeing, I will report it to the SAARTHI safeguarding lead straight away and will not handle it alone.",
+     "hi": "अगर कोई सीखने वाला अपनी सुरक्षा या मानसिक स्वास्थ्य के बारे में चिंताजनक बात बताए, तो मैं तुरंत SAARTHI के सुरक्षा-प्रमुख को बताऊँगा/बताऊँगी और अकेले इसे नहीं सँभालूँगा/सँभालूँगी।"},
+    {"id": "no_personal_requests", "en": "I will never ask learners for personal photos or personal details that the mentoring does not need.",
+     "hi": "मैं सीखने वालों से निजी तस्वीरें या ऐसी निजी जानकारी नहीं माँगूँगा/माँगूँगी जिसकी मेंटरिंग में ज़रूरत नहीं।"},
+    {"id": "confidential", "en": "I will keep what learners share with me confidential, except where safety requires me to report it.",
+     "hi": "सीखने वाले जो मुझे बताएँ उसे गोपनीय रखूँगा/रखूँगी, सिवाय उन मामलों के जहाँ सुरक्षा के लिए बताना ज़रूरी हो।"},
+    {"id": "removal", "en": "I understand I can be removed from SAARTHI if I break any of these promises.",
+     "hi": "मैं समझता/समझती हूँ कि इनमें से कोई भी वादा तोड़ने पर मुझे SAARTHI से हटाया जा सकता है।"}
+  ]
+}

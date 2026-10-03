@@ -1,0 +1,247 @@
+{
+  "misconceptions": [
+    {
+      "id": "left_join_as_inner", "concept_id": "sql_outer_join",
+      "name": "LEFT JOIN returns only matching rows",
+      "description": "Treats LEFT JOIN like INNER JOIN. In fact a LEFT JOIN keeps every row of the left table; where there is no match the right-hand columns are NULL.",
+      "statements": ["a left join only returns the rows that match", "left join is basically inner join", "left join only gives rows present in both tables"],
+      "check_question": "Customer 7 has no orders. After `customers LEFT JOIN orders`, does customer 7 appear in the result? What do the order columns show?",
+      "counter_example": {"query": "SELECT c.name, o.id FROM customers c LEFT JOIN orders o ON o.customer_id = c.id", "explanation": "Deepak Yadav and Meera Joshi have no orders, yet they appear — with NULL in the order columns. An INNER JOIN would drop them."},
+      "fix_hint": "Count the left-table rows before and after the join: a LEFT JOIN never has fewer rows than the left table."
+    },
+    {
+      "id": "left_join_where_filter", "concept_id": "sql_outer_join",
+      "name": "Filtering the right table in WHERE cancels the LEFT JOIN",
+      "description": "A condition on the right table in WHERE removes the NULL-padded rows, so the LEFT JOIN silently behaves like an INNER JOIN. Put the condition in ON to keep unmatched left rows.",
+      "statements": ["i put the filter in where after the left join", "where and on do the same thing in a left join"],
+      "check_question": "If you LEFT JOIN orders and then write WHERE o.status = 'delivered', what happens to customers who have no orders?",
+      "counter_example": {"query": "SELECT c.name, o.id FROM customers c LEFT JOIN orders o ON o.customer_id = c.id AND o.status = 'delivered'", "explanation": "With the condition in ON, every customer still appears; customers without a delivered order show NULL."},
+      "fix_hint": "Move conditions on the right table from WHERE into the ON clause when you must keep unmatched left rows."
+    },
+    {
+      "id": "join_without_condition", "concept_id": "sql_inner_join",
+      "name": "Joining tables without a join condition",
+      "description": "Listing two tables (or JOIN without ON) pairs every row with every row — a cartesian product.",
+      "statements": ["sql will figure out how the tables are related", "i just wrote from orders, customers"],
+      "check_question": "If orders has 12 rows and customers has 8, how many rows come out of `FROM orders, customers` with no condition?",
+      "counter_example": {"query": "SELECT o.id, c.name FROM orders o, customers c", "explanation": "12 x 8 = 96 rows: every order is paired with every customer. The ON condition is what links an order to its own customer."},
+      "fix_hint": "Always state how the tables relate: JOIN ... ON a.key = b.key."
+    },
+    {
+      "id": "join_fanout_sum", "concept_id": "sql_multi_table",
+      "name": "Summing after a one-to-many join counts values more than once",
+      "description": "Joining orders to order_items repeats each order's amount once per item, so SUM(o.amount) is inflated.",
+      "statements": ["joins dont change the totals", "i joined the items table and summed the amount"],
+      "check_question": "Order 101 has two item rows. If you join orders to order_items and SUM(orders.amount), how many times is order 101's amount counted?",
+      "counter_example": {"query": "SELECT c.name, SUM(o.amount) AS total FROM customers c JOIN orders o ON o.customer_id = c.id GROUP BY c.name", "explanation": "Without the order_items join each order is counted once. Aggregate at the right level, or sum item-level values instead."},
+      "fix_hint": "Before aggregating, ask: does this join repeat my rows? Aggregate before joining or sum values from the many-side table."
+    },
+    {
+      "id": "join_fanout_duplicates", "concept_id": "sql_multi_table",
+      "name": "Multi-table joins repeat rows",
+      "description": "Joining through a one-to-many chain repeats combinations. Use DISTINCT or aggregation when you want unique pairs.",
+      "statements": ["why am i getting the same row twice", "my join returns duplicates"],
+      "check_question": "Aarav bought a Pen Set in two different orders. How many times does the pair (Aarav, Pen Set) appear after joining through orders and order_items?",
+      "counter_example": {"query": "SELECT DISTINCT c.name, p.name AS product FROM customers c JOIN orders o ON o.customer_id = c.id JOIN order_items oi ON oi.order_id = o.id JOIN products p ON p.id = oi.product_id", "explanation": "DISTINCT collapses repeated (customer, product) pairs."},
+      "fix_hint": "Count rows at each join step; use DISTINCT only after you understand why rows repeat."
+    },
+    {
+      "id": "null_comparison", "concept_id": "sql_null",
+      "name": "Comparing with NULL using = or <>",
+      "description": "NULL means unknown; `= NULL` and `<> NULL` are never true. Use IS NULL / IS NOT NULL.",
+      "statements": ["where city = null", "null equals null", "i compare with null using equals"],
+      "check_question": "What does `SELECT 1 WHERE NULL = NULL` return — one row or none? Why?",
+      "counter_example": {"query": "SELECT name FROM customers WHERE city IS NULL", "explanation": "IS NULL finds the customer whose city is unknown. `city = NULL` finds nothing because NULL = NULL is unknown, not true."},
+      "fix_hint": "Use IS NULL and IS NOT NULL."
+    },
+    {
+      "id": "null_in_not_equal", "concept_id": "sql_null",
+      "name": "<> 'x' also keeps rows where the value is NULL",
+      "description": "A row whose status is NULL is neither equal to nor different from 'delivered'; a `<>` filter silently drops it.",
+      "statements": ["not equal to delivered will include everything else", "status <> delivered gives all the other orders"],
+      "check_question": "Order 106 has status NULL. Does `WHERE status <> 'delivered'` include it?",
+      "counter_example": {"query": "SELECT id FROM orders WHERE status <> 'delivered' OR status IS NULL", "explanation": "Add `OR status IS NULL` to include rows with an unknown status."},
+      "fix_hint": "When a column can be NULL, decide explicitly what should happen to the NULL rows."
+    },
+    {
+      "id": "not_in_null", "concept_id": "sql_subqueries",
+      "name": "NOT IN with a subquery that returns NULL matches nothing",
+      "description": "If the subquery result contains a NULL, `x NOT IN (...)` is never true. Use NOT EXISTS or filter NULLs out.",
+      "statements": ["not in always works"],
+      "check_question": "What does `WHERE 5 NOT IN (1, 2, NULL)` evaluate to?",
+      "counter_example": {"query": "SELECT name FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id)", "explanation": "NOT EXISTS is not tripped up by NULLs."},
+      "fix_hint": "Prefer NOT EXISTS, or add WHERE col IS NOT NULL inside the subquery."
+    },
+    {
+      "id": "count_star_vs_column", "concept_id": "sql_aggregates",
+      "name": "COUNT(*) and COUNT(column) are the same",
+      "description": "COUNT(*) counts rows; COUNT(column) counts rows where the column is not NULL.",
+      "statements": ["count star and count column give the same number", "count counts everything"],
+      "check_question": "Order 106 has no status. Will COUNT(*) and COUNT(status) over all orders give the same number?",
+      "counter_example": {"query": "SELECT COUNT(*) AS all_orders, COUNT(status) AS with_status FROM orders", "explanation": "12 orders, but only 11 have a status."},
+      "fix_hint": "Use COUNT(column) to ignore NULLs, COUNT(*) to count rows."
+    },
+    {
+      "id": "count_star_with_left_join", "concept_id": "sql_outer_join",
+      "name": "COUNT(*) after a LEFT JOIN counts the NULL row as 1",
+      "description": "A customer with no orders still produces one NULL-padded row, so COUNT(*) gives 1 instead of 0. Count a column from the right table.",
+      "statements": ["count star gives the number of orders"],
+      "check_question": "Customer 7 has no orders. After a LEFT JOIN to orders, what does COUNT(*) return for that customer — and what should it be?",
+      "counter_example": {"query": "SELECT c.name, COUNT(o.id) AS n_orders FROM customers c LEFT JOIN orders o ON o.customer_id = c.id GROUP BY c.id, c.name", "explanation": "COUNT(o.id) ignores the NULL, so unmatched customers get 0."},
+      "fix_hint": "After a LEFT JOIN, count a column from the right-hand table (COUNT(o.id)), not *."
+    },
+    {
+      "id": "group_by_select_nonaggregated", "concept_id": "sql_group_by",
+      "name": "Selecting a plain column next to an aggregate without GROUP BY",
+      "description": "Without GROUP BY an aggregate collapses the table to one row; the plain column then shows an arbitrary value (or errors in other databases).",
+      "statements": ["i selected the customer and the sum together", "sql will group it automatically"],
+      "check_question": "What does `SELECT customer_id, SUM(amount) FROM orders` (no GROUP BY) return — one row per customer, or one row total?",
+      "counter_example": {"query": "SELECT customer_id, SUM(amount) AS total FROM orders GROUP BY customer_id", "explanation": "GROUP BY makes one result row per customer_id."},
+      "fix_hint": "Every non-aggregated column in SELECT must appear in GROUP BY."
+    },
+    {
+      "id": "where_vs_having", "concept_id": "sql_having",
+      "name": "Using WHERE to filter on an aggregate",
+      "description": "WHERE filters rows before grouping, so it cannot use COUNT/SUM results. HAVING filters groups after aggregation.",
+      "statements": ["where count greater than one", "where and having are the same"],
+      "check_question": "Which runs first — WHERE or GROUP BY? So can WHERE see COUNT(*)?",
+      "counter_example": {"query": "SELECT customer_id, COUNT(*) AS n FROM orders GROUP BY customer_id HAVING COUNT(*) > 1", "explanation": "HAVING runs after the groups exist."},
+      "fix_hint": "Row conditions -> WHERE. Conditions on aggregates -> HAVING."
+    },
+    {
+      "id": "and_or_precedence", "concept_id": "sql_filtering",
+      "name": "AND binds tighter than OR",
+      "description": "`a OR b AND c` means `a OR (b AND c)`. Use parentheses to say what you mean.",
+      "statements": ["sql reads the conditions left to right", "i did not use brackets"],
+      "check_question": "How does SQL read `city='Lucknow' OR city='Varanasi' AND signup_date > '2025-03-01'`? Which part is grouped?",
+      "counter_example": {"query": "SELECT name FROM customers WHERE (city='Lucknow' OR city='Varanasi') AND signup_date > '2025-03-01'", "explanation": "Brackets make the date test apply to both cities."},
+      "fix_hint": "Whenever you mix AND and OR, add parentheses."
+    },
+    {
+      "id": "like_wildcards", "concept_id": "sql_filtering",
+      "name": "LIKE without wildcards matches whole values",
+      "description": "`LIKE 'Pen'` only matches the exact text 'Pen'. Use % for 'anything': '%Pen%'.",
+      "statements": ["like pen finds anything containing pen"],
+      "check_question": "Does `name LIKE 'Pen'` match 'Pen Set'?",
+      "counter_example": {"query": "SELECT name FROM products WHERE name LIKE '%Pen%'", "explanation": "% stands for any number of characters."},
+      "fix_hint": "Use % at the start/end for 'contains'."
+    },
+    {
+      "id": "limit_without_order", "concept_id": "sql_sorting_limit",
+      "name": "LIMIT alone gives the top rows",
+      "description": "Without ORDER BY the row order is not defined, so LIMIT 3 returns three arbitrary rows, not the 'top 3'.",
+      "statements": ["limit 3 gives the top three", "rows come out in the order they were inserted"],
+      "check_question": "Is the first row of a table without ORDER BY guaranteed to be the highest price?",
+      "counter_example": {"query": "SELECT name, price FROM products ORDER BY price DESC LIMIT 3", "explanation": "ORDER BY defines 'top'; LIMIT then cuts the list."},
+      "fix_hint": "ORDER BY before LIMIT whenever the answer depends on order."
+    },
+    {
+      "id": "distinct_one_column", "concept_id": "sql_sorting_limit",
+      "name": "DISTINCT applies to just the first column",
+      "description": "DISTINCT applies to the whole selected row, not to a single column.",
+      "statements": ["distinct city, name gives unique cities"],
+      "check_question": "What does `SELECT DISTINCT city, name FROM customers` make unique — city, name, or the pair?",
+      "counter_example": {"query": "SELECT DISTINCT city FROM customers", "explanation": "To get unique cities select only the city."},
+      "fix_hint": "DISTINCT works on the full combination of selected columns."
+    },
+    {
+      "id": "avg_ignores_null", "concept_id": "sql_aggregates",
+      "name": "AVG treats NULL as zero",
+      "description": "AVG ignores NULLs: the average of 10, 20 and NULL is 15, not 10.",
+      "statements": ["null counts as zero in averages"],
+      "check_question": "What is AVG of the values 10, 20 and NULL?",
+      "counter_example": {"query": "SELECT AVG(amount) FROM orders", "explanation": "NULL values are skipped; use COALESCE(x, 0) if zeros are intended."},
+      "fix_hint": "Decide whether a missing value should count as 0 and use COALESCE explicitly."
+    },
+    {
+      "id": "index_always_faster", "concept_id": "sql_indexes",
+      "name": "More indexes always make the database faster",
+      "description": "Indexes speed up reads on the indexed columns but slow down writes and use space. They do not help every query.",
+      "statements": ["index everything", "an index always helps"],
+      "check_question": "What happens to INSERT speed when a table has many indexes?",
+      "counter_example": {"query": "", "explanation": "Each insert must also update every index."},
+      "fix_hint": "Index columns used in WHERE / JOIN / ORDER BY of frequent, slow queries."
+    },
+    {
+      "id": "uncommitted_visible", "concept_id": "sql_transactions",
+      "name": "Uncommitted changes are visible to everyone immediately",
+      "description": "Inside a transaction your changes are private until COMMIT (isolation).",
+      "statements": ["as soon as i run update everybody sees it"],
+      "check_question": "Another session reads a row you updated but have not committed. Which value does it see?",
+      "counter_example": {"query": "", "explanation": "It sees the old value; that is isolation, part of ACID."},
+      "fix_hint": "Think of a transaction as all-or-nothing and private until commit."
+    },
+    {
+      "id": "put_post_same", "concept_id": "rest_apis",
+      "name": "POST and PUT are interchangeable",
+      "description": "PUT replaces a resource at a known URL and is idempotent; POST usually creates a new resource and is not idempotent.",
+      "statements": ["post and put do the same thing"],
+      "check_question": "If you send the same PUT twice, is the result different from sending it once? What about POST?",
+      "counter_example": {"query": "", "explanation": "Repeating a PUT leaves the same state; repeating a POST can create duplicates."},
+      "fix_hint": "Use POST to create, PUT to replace, PATCH to update part of a resource."
+    },
+    {
+      "id": "status_401_403_swapped", "concept_id": "http_basics",
+      "name": "401 and 403 mean the same thing",
+      "description": "401 = not authenticated (who are you?). 403 = authenticated but not allowed.",
+      "statements": ["401 is forbidden", "403 means you need to log in"],
+      "check_question": "A logged-in user opens an admin-only page. Which status should the server return?",
+      "counter_example": {"query": "", "explanation": "403 Forbidden: the identity is known but lacks permission. 401 means credentials are missing or invalid."},
+      "fix_hint": "401 -> prove who you are; 403 -> you are not allowed."
+    },
+    {
+      "id": "get_changes_data", "concept_id": "http_basics",
+      "name": "A GET request can be used to change data",
+      "description": "GET must be safe and read-only; changes should use POST/PUT/PATCH/DELETE.",
+      "statements": ["i can delete with a get link"],
+      "check_question": "Why is a `GET /delete?id=5` link dangerous?",
+      "counter_example": {"query": "", "explanation": "Browsers, crawlers and prefetchers issue GETs freely, so a GET must never change state."},
+      "fix_hint": "Use the method that matches the action."
+    },
+    {
+      "id": "container_is_vm", "concept_id": "docker_basics",
+      "name": "A Docker container is a full virtual machine",
+      "description": "Containers share the host kernel and isolate processes; a VM boots its own operating system.",
+      "statements": ["docker is like a vm"],
+      "check_question": "Does each container run its own operating-system kernel?",
+      "counter_example": {"query": "", "explanation": "Containers share the host kernel, which is why they start in seconds and are lighter."},
+      "fix_hint": "Image = recipe, container = running instance sharing the host kernel."
+    },
+    {
+      "id": "star_all_we", "concept_id": "comm_star_story",
+      "name": "Attributes all actions to 'we' without clarifying own contribution",
+      "description": "In behavioural answers, using only 'we' makes it impossible for the interviewer to assess what you personally contributed or decided.",
+      "statements": ["we did everything together", "we handled the whole project and we resolved it"],
+      "check_question": "When describing a team achievement, how should you separate your individual actions from the team's?",
+      "counter_example": {"query": "", "explanation": "Say: 'The team's goal was X; my specific responsibility was Y, so I implemented Z.'"},
+      "fix_hint": "Use 'I' for your specific actions and decisions; use 'we' only for shared goals or context."
+    },
+    {
+      "id": "star_no_result", "concept_id": "comm_star_story",
+      "name": "Omits measurable outcome or impact in STAR answer",
+      "description": "Ending a behavioural answer with the task or action, without describing the result or what was learned.",
+      "statements": ["then we finished the task", "so we wrote the code and that was it"],
+      "check_question": "Why is the 'Result' in STAR critical for interviewers?",
+      "counter_example": {"query": "", "explanation": "Without the Result, the interviewer cannot tell if your action solved the problem or improved any metric."},
+      "fix_hint": "Always finish with what happened: error reduction, speedup, deadline met, or lessons learned."
+    },
+    {
+      "id": "intro_rambling", "concept_id": "comm_self_intro",
+      "name": "Rambles without structure in self-introduction",
+      "description": "Reciting entire life history or CV linearly rather than focusing on relevant skills, recent work, and why you want this role.",
+      "statements": ["i was born in and then went to school", "my whole life story is"],
+      "check_question": "What is the recommended 3-part structure for a 90-second self-introduction?",
+      "counter_example": {"query": "", "explanation": "Structure as: Present (current focus/skills) -> Past (key project/achievement) -> Future (why this role)."},
+      "fix_hint": "Keep it under 90 seconds and focus on: who you are today, what you built, and why this role."
+    },
+    {
+      "id": "project_no_role", "concept_id": "comm_project_walkthrough",
+      "name": "Describes project features without explaining personal role or architectural decisions",
+      "description": "Listing what the app does without explaining architecture, trade-offs, and your personal responsibilities.",
+      "statements": ["the project has login and a dashboard", "users can click buttons to view data"],
+      "check_question": "What should an engineer emphasize when walking through a project?",
+      "counter_example": {"query": "", "explanation": "Interviewers evaluate your engineering decisions, system architecture, and specific role — not just product features."},
+      "fix_hint": "Lead with system architecture, data flow, your specific components, and a difficult technical challenge."
+    }
+  ]
+}
