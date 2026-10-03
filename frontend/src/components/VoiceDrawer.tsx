@@ -126,31 +126,40 @@ export default function VoiceDrawer({ open, onClose, initialMode = 'explain_back
   const orbState = !connected ? 'idle' : speaking ? 'speaking' : 'listening'
 
   return (
-    <div className="fixed inset-0 z-50 bg-navy/60 backdrop-blur-sm flex items-stretch md:items-center justify-center p-0 md:p-4" role="dialog" aria-modal="true" aria-label="Talk to SAARTHI">
-      <div className="bg-paper w-full max-w-6xl md:rounded-3xl overflow-hidden flex flex-col max-h-full shadow-2xl">
-        <div className="bg-navy text-white px-5 py-3 flex items-center justify-between gap-3">
+    <div className="fixed inset-0 z-50 bg-[rgba(5,14,22,0.75)] backdrop-blur-md flex items-stretch md:items-center justify-center p-0 md:p-4" role="dialog" aria-modal="true" aria-label="Talk to SAARTHI">
+      <div className="bg-[rgba(12,22,32,0.70)] backdrop-blur-2xl border border-[rgba(210,225,235,0.20)] w-full max-w-6xl md:rounded-3xl overflow-hidden flex flex-col max-h-full shadow-2xl text-white">
+        <div className="bg-[rgba(10,20,30,0.50)] backdrop-blur-md text-white px-5 py-3.5 flex items-center justify-between gap-3 border-b border-[rgba(210,225,235,0.14)]">
           <div className="flex items-center gap-3">
-            <div className="font-extrabold tracking-tight text-lg">SAARTHI <span className="text-saffron">voice mentor</span></div>
-            <span className="chip" style={{ background: 'rgba(255,255,255,.14)', color: '#fff' }}>Powered by ElevenLabs Agents</span>
+            <div className="font-extrabold tracking-tight text-lg heading-glow">SAARTHI <span className="text-[#FF8A24]">voice mentor</span></div>
+            <span className="chip" style={{ background: 'rgba(255,138,36,0.12)', color: '#FF8A24', border: '1px solid rgba(255,138,36,0.30)' }}>Powered by ElevenLabs</span>
           </div>
-          <button className="btn btn-sm" style={{ background: 'rgba(255,255,255,.12)', color: '#fff' }} onClick={close}>Close ✕</button>
+          <button className="btn btn-sm btn-ghost" onClick={close}>Close ✕</button>
         </div>
 
-        <div className="overflow-auto grid lg:grid-cols-[1fr_340px] gap-4 p-4">
+        <div className="overflow-auto grid lg:grid-cols-[1fr_340px] gap-4 p-5">
           <div className="space-y-4 min-w-0">
             {!connected && (
-              <div className="card p-4 space-y-3">
+              <div className="card p-5 space-y-4">
                 <div className="eyebrow">Step 1 · choose what to do</div>
-                <div className="grid sm:grid-cols-2 gap-2">
+                <div className="grid sm:grid-cols-2 gap-2.5">
                   {MODES.map(m => (
-                    <button key={m.id} onClick={() => setMode(m.id)} className={`text-left rounded-xl border p-3 ${mode === m.id ? 'border-saffron bg-saffron-soft ring-2 ring-saffron/30' : 'border-line bg-white hover:bg-paper'}`}>
-                      <div className="font-bold text-navy text-sm">{m.label}</div><div className="text-xs text-muted">{m.hint}</div>
+                    <button 
+                      key={m.id} 
+                      onClick={() => setMode(m.id)} 
+                      className={`text-left rounded-xl border p-3.5 transition-all ${
+                        mode === m.id 
+                          ? 'border-[#FF8A24] bg-[rgba(255,138,36,0.16)] shadow-[0_0_12px_rgba(255,138,36,0.2)]' 
+                          : 'border-[rgba(210,225,235,0.14)] bg-[rgba(20,32,44,0.35)] hover:bg-[rgba(28,42,56,0.50)]'
+                      }`}
+                    >
+                      <div className="font-bold text-white text-sm">{m.label}</div>
+                      <div className="text-xs text-slate-300 desc-glow mt-0.5">{m.hint}</div>
                     </button>
                   ))}
                 </div>
                 {mode !== 'interview' && (
-                  <label className="block text-sm font-semibold">Concept (optional — SAARTHI picks the most useful one if you don't)
-                    <select className="input mt-1" value={concept} onChange={e => setConcept(e.target.value)}>
+                  <label className="block text-sm font-semibold text-slate-200 desc-glow">Concept (optional — SAARTHI picks the most useful one if you don't)
+                    <select className="input mt-1.5" value={concept} onChange={e => setConcept(e.target.value)}>
                       <option value="">Let SAARTHI choose</option>
                       {concepts.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
@@ -158,25 +167,25 @@ export default function VoiceDrawer({ open, onClose, initialMode = 'explain_back
                 )}
                 {vstatus && !vstatus.agent_ready && (
                   <Callout tone="saffron" title="Voice agent is not set up yet">
-                    Create the ElevenLabs agent and add <code>ELEVENLABS_AGENT_ID</code> + <code>ELEVENLABS_API_KEY</code> to <code>backend/.env</code> (guide: <code>docs/ELEVENLABS_SETUP.md</code>). Meanwhile you can <Link className="underline font-bold" to={`/learn/${concept || 'sql_outer_join'}`} onClick={close}>teach it back in text</Link> — it uses the same engine.
+                    Create the ElevenLabs agent and add <code>ELEVENLABS_AGENT_ID</code> + <code>ELEVENLABS_API_KEY</code> to <code>backend/.env</code> (guide: <code>docs/ELEVENLABS_SETUP.md</code>). Meanwhile you can <Link className="underline font-bold text-[#FF8A24]" to={`/learn/${concept || 'sql_outer_join'}`} onClick={close}>teach it back in text</Link> — it uses the same engine.
                   </Callout>
                 )}
                 {setupError && <Callout tone="red" title="Could not start the voice session">{setupError}</Callout>}
-                <button className="btn btn-saffron w-full py-3 text-base" onClick={start} disabled={connecting || !!(vstatus && !vstatus.agent_ready)}>
+                <button className="btn btn-primary w-full py-3 text-base" onClick={start} disabled={connecting || !!(vstatus && !vstatus.agent_ready)}>
                   {connecting ? 'Connecting…' : '🎙 Start talking'}
                 </button>
-                <div className="text-xs text-muted">Your browser will ask for microphone access. Prefer typing? Use the text teach-back on any concept page — same scoring.</div>
+                <div className="text-xs text-slate-400 desc-glow">Your browser will ask for microphone access. Prefer typing? Use the text teach-back on any concept page — same scoring.</div>
               </div>
             )}
 
             {connected && (
-              <div className="card p-4 flex items-center gap-4">
-                <div className={`h-16 w-16 rounded-full flex items-center justify-center text-2xl text-white shrink-0 ${orbState === 'speaking' ? 'bg-saffron pulse-ring' : 'bg-teal'}`} aria-hidden>
+              <div className="card p-5 flex items-center gap-4">
+                <div className={`h-16 w-16 rounded-full flex items-center justify-center text-2xl text-white shrink-0 ${orbState === 'speaking' ? 'bg-[#FF8A24] pulse-ring' : 'bg-[#4D9DFF]'}`} aria-hidden>
                   {orbState === 'speaking' ? '🗣' : '👂'}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="font-extrabold text-navy">{orbState === 'speaking' ? 'SAARTHI is speaking…' : listening || orbState === 'listening' ? "Listening — speak when you're ready" : 'Connected'}</div>
-                  <div className="text-xs text-muted">Mode: {MODES.find(m => m.id === mode)?.label} · {me?.language}</div>
+                  <div className="font-extrabold text-white text-base heading-glow">{orbState === 'speaking' ? 'SAARTHI is speaking…' : listening || orbState === 'listening' ? "Listening — speak when you're ready" : 'Connected'}</div>
+                  <div className="text-xs text-slate-300 desc-glow mt-0.5">Mode: {MODES.find(m => m.id === mode)?.label} · {me?.language}</div>
                 </div>
                 <div className="flex gap-2">
                   <button className="btn btn-ghost btn-sm" onClick={() => conv.setMuted(!(conv as any).isMuted)}>{(conv as any).isMuted ? '🔇 Unmute' : '🎤 Mute'}</button>
@@ -191,32 +200,32 @@ export default function VoiceDrawer({ open, onClose, initialMode = 'explain_back
               <div className="card p-4">
                 <div className="eyebrow">Live checklist</div>
                 <ul className="mt-1.5 space-y-1">{checklist.map((c: any) => (
-                  <li key={c.id} className={`text-sm flex gap-2 ${c.covered ? 'flash rounded' : ''}`}><span className={c.covered ? 'text-lvl-proficient font-bold' : 'text-muted'}>{c.covered ? '✓' : '○'}</span><span>{c.text}{c.covered && c.evidence ? <i className="text-muted"> — “{c.evidence}”</i> : null}</span></li>))}
+                  <li key={c.id} className={`text-sm flex gap-2 ${c.covered ? 'flash rounded' : ''}`}><span className={c.covered ? 'text-[#35D07F] font-bold' : 'text-slate-400'}>{c.covered ? '✓' : '○'}</span><span>{c.text}{c.covered && c.evidence ? <i className="text-slate-400"> — “{c.evidence}”</i> : null}</span></li>))}
                 </ul>
               </div>
             )}
             {roadmapChange && (
-              <div className="card p-4 flash" style={{ borderColor: '#e07a1f' }}>
+              <div className="card p-4 flash border-[#FF8A24]">
                 <div className="eyebrow">Roadmap updated live</div>
-                <div className="font-bold text-navy mt-0.5">{roadmapChange.change_reason}</div>
-                <div className="flex items-center gap-3 mt-2 text-xs font-semibold text-muted">
-                  Readiness <b className="text-navy">{Math.round(roadmapChange.readiness_now * 100)}%</b>
-                  <Bar value={roadmapChange.readiness_now} /> <span>after plan {Math.round(roadmapChange.readiness_after * 100)}%</span>
+                <div className="font-bold text-white mt-0.5">{roadmapChange.change_reason}</div>
+                <div className="flex items-center gap-3 mt-2 text-xs font-semibold text-slate-300">
+                  Readiness <b className="text-white">{Math.round(roadmapChange.readiness_now * 100)}%</b>
+                  <Bar value={roadmapChange.readiness_now} color="#FF8A24" /> <span>after plan {Math.round(roadmapChange.readiness_after * 100)}%</span>
                 </div>
-                {roadmap && <ol className="mt-2 text-sm list-decimal pl-5">{roadmap.items.filter((i: any) => i.status !== 'done').slice(0, 4).map((i: any) => <li key={i.item_id}><b>{i.title}</b> <span className="text-muted">— {i.why?.split('. ')[0]}</span></li>)}</ol>}
+                {roadmap && <ol className="mt-2 text-sm list-decimal pl-5">{roadmap.items.filter((i: any) => i.status !== 'done').slice(0, 4).map((i: any) => <li key={i.item_id}><b>{i.title}</b> <span className="text-slate-400">— {i.why?.split('. ')[0]}</span></li>)}</ol>}
               </div>
             )}
 
-            <div className="card p-4">
+            <div className="card p-5">
               <div className="eyebrow mb-2">Conversation</div>
-              <div ref={logRef} className="max-h-64 overflow-auto space-y-2 pr-1" aria-live="polite">
+              <div ref={logRef} className="max-h-64 overflow-auto space-y-2.5 pr-1" aria-live="polite">
                 {events.filter(e => e.kind !== 'tool').map(e => (
-                  <div key={e.id} className={`text-sm rounded-2xl px-3 py-2 max-w-[90%] ${e.kind === 'user' ? 'bg-navy text-white ml-auto' : e.kind === 'agent' ? 'bg-teal-soft' : 'bg-paper text-muted text-xs italic'}`}>{e.text}</div>
+                  <div key={e.id} className={`text-sm rounded-2xl px-4 py-2.5 max-w-[90%] ${e.kind === 'user' ? 'bg-[rgba(255,138,36,0.22)] border border-[rgba(255,138,36,0.40)] text-white ml-auto' : e.kind === 'agent' ? 'bg-[rgba(20,32,44,0.50)] border border-[rgba(210,225,235,0.16)] text-slate-100' : 'bg-[rgba(10,20,30,0.40)] text-slate-400 text-xs italic'}`}>{e.text}</div>
                 ))}
-                {!events.length && <div className="text-sm text-muted">The conversation will appear here.</div>}
+                {!events.length && <div className="text-sm text-slate-400 desc-glow">The conversation will appear here.</div>}
               </div>
               {connected && (
-                <div className="flex gap-2 mt-3">
+                <div className="flex gap-2 mt-3.5">
                   <input className="input" placeholder="Or type a message to SAARTHI…" value={typed} onChange={e => setTyped(e.target.value)} onKeyDown={e => e.key === 'Enter' && sendTyped()} aria-label="Type a message" />
                   <button className="btn btn-primary" onClick={sendTyped}>Send</button>
                 </div>
@@ -225,7 +234,7 @@ export default function VoiceDrawer({ open, onClose, initialMode = 'explain_back
           </div>
 
           {/* under the hood: makes the ElevenLabs usage obvious */}
-          <aside className="card p-4 h-fit space-y-3 lg:sticky lg:top-0" aria-label="How ElevenLabs is used">
+          <aside className="card p-5 h-fit space-y-3.5 lg:sticky lg:top-0" aria-label="How ElevenLabs is used">
             <div className="eyebrow">Under the hood</div>
             <div className="text-sm space-y-1.5">
               <Row k="ElevenLabs Agent" v={connected ? 'connected' : connecting ? 'connecting…' : 'idle'} on={connected} />
@@ -235,14 +244,14 @@ export default function VoiceDrawer({ open, onClose, initialMode = 'explain_back
               <Row k="Avg tool latency" v={avg ? avg + ' ms' : '—'} on={!!avg} />
               <Row k="Read-aloud (TTS) / Mic (STT)" v={vstatus ? `${vstatus.tts_ready ? 'TTS ✓' : 'TTS –'} · ${vstatus.stt_ready ? 'STT ✓' : 'STT –'}` : '…'} on={!!vstatus?.tts_ready} />
             </div>
-            <div className="text-xs text-muted leading-relaxed">The agent only talks. It cannot grade you or change your mastery — every answer goes through SAARTHI's tools, which run the same engines as the text app.</div>
+            <div className="text-xs text-slate-400 desc-glow leading-relaxed">The agent only talks. It cannot grade you or change your mastery — every answer goes through SAARTHI's tools, which run the same engines as the text app.</div>
             <div className="eyebrow pt-1">Tool calls</div>
             <div className="space-y-2 max-h-80 overflow-auto">
-              {toolEvents.length === 0 && <div className="text-xs text-muted">Tool calls appear here as the agent uses them.</div>}
+              {toolEvents.length === 0 && <div className="text-xs text-slate-400 desc-glow">Tool calls appear here as the agent uses them.</div>}
               {toolEvents.map(e => (
-                <details key={e.id} className="rounded-lg border border-line bg-paper/60 px-2.5 py-1.5 text-xs">
-                  <summary className="cursor-pointer font-mono font-bold text-navy">{e.name} <span className="text-muted font-sans font-medium">{e.ms ? `· ${e.ms} ms` : '· running…'}</span></summary>
-                  <pre className="whitespace-pre-wrap mt-1 text-[10.5px] leading-snug">{JSON.stringify({ args: e.args, result: e.result?.say ?? e.result }, null, 1).slice(0, 900)}</pre>
+                <details key={e.id} className="rounded-xl border border-[rgba(210,225,235,0.14)] bg-[rgba(15,25,35,0.40)] px-3 py-2 text-xs">
+                  <summary className="cursor-pointer font-mono font-bold text-white hover:text-[#FF8A24] transition-colors">{e.name} <span className="text-slate-400 font-sans font-medium">{e.ms ? `· ${e.ms} ms` : '· running…'}</span></summary>
+                  <pre className="whitespace-pre-wrap mt-1 text-[10.5px] leading-snug text-slate-300 font-mono">{JSON.stringify({ args: e.args, result: e.result?.say ?? e.result }, null, 1).slice(0, 900)}</pre>
                 </details>
               ))}
             </div>

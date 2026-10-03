@@ -38,49 +38,116 @@ export default function JoinDiagram({ initial = 'left' }: { initial?: Mode }) {
   const rows = compute(mode)
   const keepsAll = mode === 'left' || mode === 'left_on'
   const matchedCust = new Set(ORDERS.map(o => o.c))
+
   return (
-    <div className="card p-4">
-      <div className="flex flex-wrap gap-1.5 mb-3" role="tablist" aria-label="Join type">
+    <div className="card p-5 space-y-4">
+      <div className="flex flex-wrap gap-2" role="tablist" aria-label="Join type">
         {MODES.map(x => (
-          <button key={x.id} role="tab" aria-selected={mode === x.id} onClick={() => setMode(x.id)} className={`btn btn-sm ${mode === x.id ? 'btn-primary' : 'btn-ghost'}`}>{x.label}</button>
+          <button
+            key={x.id}
+            role="tab"
+            aria-selected={mode === x.id}
+            onClick={() => setMode(x.id)}
+            className={`btn btn-sm text-xs font-semibold ${
+              mode === x.id
+                ? 'btn-orange shadow-[0_0_14px_rgba(255,138,36,0.3)]'
+                : 'btn-secondary text-[var(--text-secondary)]'
+            }`}
+          >
+            {x.label}
+          </button>
         ))}
       </div>
-      <div className="grid md:grid-cols-2 gap-4">
-        <div>
+
+      <div className="grid md:grid-cols-2 gap-5 items-start">
+        <div className="p-3.5 rounded-2xl bg-[rgba(7,19,29,0.40)] border border-[rgba(77,157,255,0.2)] shadow-inner">
           <svg viewBox="0 0 330 250" className="w-full" role="img" aria-label={`Diagram of ${m.label}: customers on the left, orders on the right`}>
-            <text x="0" y="12" fontSize="10" fontWeight="800" fill="#16324f">customers</text>
-            <text x="250" y="12" fontSize="10" fontWeight="800" fill="#16324f">orders</text>
+            <text x="0" y="12" fontSize="10" fontWeight="800" fill="#4D9DFF" letterSpacing="0.05em">CUSTOMERS</text>
+            <text x="250" y="12" fontSize="10" fontWeight="800" fill="#35D07F" letterSpacing="0.05em">ORDERS</text>
+
             {CUSTOMERS.map((c, i) => {
               const y = 20 + i * 27
-              const lost = !keepsAll && !matchedCust.has(c.id)
+              const isMatched = matchedCust.has(c.id)
+              const lost = !keepsAll && !isMatched
               return (
-                <g key={c.id} opacity={lost ? 0.35 : 1}>
-                  <rect x="0" y={y} width="110" height="21" rx="6" fill={matchedCust.has(c.id) ? '#e8eef5' : '#fdf3e9'} stroke={matchedCust.has(c.id) ? '#c9d3df' : '#e07a1f'} />
-                  <text x="7" y={y + 14} fontSize="10" fontWeight="600" fill="#1e2530">{c.id} · {c.name}</text>
+                <g key={c.id} opacity={lost ? 0.25 : 1} className="transition-opacity duration-200">
+                  <rect
+                    x="0"
+                    y={y}
+                    width="112"
+                    height="21"
+                    rx="6"
+                    fill={isMatched ? 'rgba(25, 39, 51, 0.50)' : 'rgba(40, 24, 15, 0.50)'}
+                    stroke={isMatched ? 'rgba(77, 157, 255, 0.4)' : 'rgba(255, 138, 36, 0.5)'}
+                    strokeWidth="1"
+                  />
+                  <text
+                    x="7"
+                    y={y + 14}
+                    fontSize="9.5"
+                    fontWeight="600"
+                    fill={isMatched ? '#F4F7F8' : '#FED7AA'}
+                  >
+                    {c.id} · {c.name}
+                  </text>
                 </g>
               )
             })}
+
             {ORDERS.map((o, i) => {
               const y = 20 + i * 18
               const cy = 20 + (o.c - 1) * 27 + 10.5
               const filtered = (mode === 'left_where' || mode === 'left_on') && o.s !== 'delivered'
               return (
-                <g key={o.id} opacity={filtered ? 0.25 : 1}>
-                  <path d={`M110,${cy} C170,${cy} 190,${y + 8} 250,${y + 8}`} fill="none" stroke="#1f7a7a" strokeWidth="1.3" />
-                  <rect x="250" y={y} width="78" height="16" rx="5" fill="#e3f2f1" stroke="#1f7a7a" />
-                  <text x="256" y={y + 11.5} fontSize="9" fontWeight="600" fill="#1e2530">{o.id} · {o.s ?? 'NULL'}</text>
+                <g key={o.id} opacity={filtered ? 0.2 : 1} className="transition-opacity duration-200">
+                  <path
+                    d={`M112,${cy} C170,${cy} 190,${y + 8} 250,${y + 8}`}
+                    fill="none"
+                    stroke="#4D9DFF"
+                    strokeWidth="1.2"
+                    strokeOpacity="0.65"
+                  />
+                  <rect
+                    x="250"
+                    y={y}
+                    width="78"
+                    height="16"
+                    rx="5"
+                    fill="rgba(12, 35, 51, 0.50)"
+                    stroke="rgba(53, 208, 127, 0.45)"
+                    strokeWidth="1"
+                  />
+                  <text
+                    x="256"
+                    y={y + 11.5}
+                    fontSize="8.5"
+                    fontWeight="600"
+                    fill="#D1FAE5"
+                  >
+                    {o.id} · {o.s ?? 'NULL'}
+                  </text>
                 </g>
               )
             })}
           </svg>
         </div>
-        <div>
-          <pre className="text-[11.5px] bg-navy text-white rounded-xl p-3 mb-2 overflow-auto leading-relaxed">{'SELECT c.name, o.id\n' + m.sql}</pre>
-          <div className="text-sm font-semibold text-navy mb-2">{m.note}</div>
-          <DataTable columns={['name', 'order_id', 'status']} rows={rows.map(r => [r.name, r.oid, r.status])} />
-          <div className="text-xs text-muted mt-1.5">{rows.length} rows · {rows.filter(r => !r.matched).length} unmatched customer(s) kept</div>
+
+        <div className="space-y-3">
+          <pre className="text-xs bg-[rgba(7,19,29,0.50)] border border-[rgba(77,157,255,0.25)] text-[#e2e8f0] rounded-xl p-3.5 overflow-auto font-mono leading-relaxed shadow-sm">
+            {'SELECT c.name, o.id\n' + m.sql}
+          </pre>
+          <div className="text-xs sm:text-sm font-medium text-[var(--accent-orange)] desc-glow leading-relaxed">
+            {m.note}
+          </div>
+          <div className="rounded-xl border border-[var(--border-subtle)] overflow-hidden">
+            <DataTable columns={['name', 'order_id', 'status']} rows={rows.map(r => [r.name, r.oid, r.status])} />
+          </div>
+          <div className="text-xs text-[var(--text-muted)] font-mono">
+            {rows.length} rows returned · {rows.filter(r => !r.matched).length} unmatched customer(s) retained
+          </div>
         </div>
       </div>
     </div>
   )
 }
+

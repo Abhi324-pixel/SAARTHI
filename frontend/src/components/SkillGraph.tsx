@@ -46,7 +46,7 @@ export default function SkillGraph({ nodes, edges, onSelect, highlight }: { node
 
   return (
     <div>
-      <div className="overflow-auto rounded-xl border border-line bg-white" style={{ maxHeight: 560 }}>
+      <div className="overflow-auto rounded-xl border border-[rgba(210,225,235,0.16)] bg-[rgba(11,23,34,0.75)] backdrop-blur-md" style={{ maxHeight: 560 }}>
         <svg width={width + 24} height={height + 24} role="img" aria-label="Skill graph: concepts coloured by your current level, arrows point from prerequisite to dependent concept">
           <g transform="translate(12,12)">
             {edges.map((e, i) => {
@@ -55,37 +55,43 @@ export default function SkillGraph({ nodes, edges, onSelect, highlight }: { node
               const x1 = a.x + W, y1 = a.y + H / 2, x2 = b.x, y2 = b.y + H / 2
               const mx = (x1 + x2) / 2
               const active = related.size === 0 || (related.has(e.from) && related.has(e.to))
-              return <path key={i} d={`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`} fill="none" stroke={active ? '#7a8aa0' : '#d5dce5'} strokeWidth={active && related.size ? 2 : 1.2} opacity={active ? 1 : 0.5} />
+              return <path key={i} d={`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`} fill="none" stroke={active && related.size ? '#FF8A24' : 'rgba(210,225,235,0.22)'} strokeWidth={active && related.size ? 2.5 : 1.2} opacity={active ? 1 : 0.4} />
             })}
             {nodes.map(n => {
               const p = pos.get(n.id)!
-              const fill = LEVEL_FILL[n.level] ?? '#b0bec5'
+              const fill = LEVEL_FILL[n.level] ?? '#788895'
               const dim = related.size > 0 && !related.has(n.id)
-              const light = n.level === 'not_assessed'
+              const notAssessed = n.level === 'not_assessed'
               const blocked = n.flags.includes('blocked')
               return (
-                <g key={n.id} transform={`translate(${p.x},${p.y})`} opacity={dim ? 0.35 : n.in_role ? 1 : 0.6} style={{ cursor: onSelect ? 'pointer' : 'default' }}
+                <g key={n.id} transform={`translate(${p.x},${p.y})`} opacity={dim ? 0.30 : n.in_role ? 1 : 0.65} style={{ cursor: onSelect ? 'pointer' : 'default' }}
                   tabIndex={0} role="button" aria-label={`${n.name}: ${n.level.replace('_', ' ')}, ${Math.round(n.p * 100)} percent${n.flags.length ? ', ' + n.flags.join(', ') : ''}`}
                   onClick={() => onSelect?.(n.id)} onKeyDown={ev => { if (ev.key === 'Enter') onSelect?.(n.id) }}
                   onMouseEnter={() => setHover(n.id)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(n.id)} onBlur={() => setHover(null)}>
-                  <rect width={W} height={H} rx={11} fill={light ? '#fff' : fill} stroke={blocked ? '#e07a1f' : light ? '#b0bec5' : fill} strokeWidth={blocked ? 2.5 : 1.5} strokeDasharray={blocked ? '5 3' : undefined} />
-                  <text x={10} y={19} fontSize={11.5} fontWeight={700} fill={light ? '#1e2530' : '#fff'}>{n.name.length > 24 ? n.name.slice(0, 23) + '…' : n.name}</text>
-                  <text x={10} y={35} fontSize={10} fill={light ? '#5b6675' : 'rgba(255,255,255,.85)'}>{n.level === 'not_assessed' ? 'not assessed' : `${Math.round(n.p * 100)}% · ${n.level}`}</text>
-                  {n.flags.includes('misconception') && <g><circle cx={W - 12} cy={12} r={8} fill="#7b1fa2" stroke="#fff" strokeWidth={1.5} /><text x={W - 12} y={16} fontSize={11} fontWeight={800} fill="#fff" textAnchor="middle">!</text></g>}
-                  {n.flags.includes('due_for_review') && <circle cx={W - 12} cy={H - 11} r={5} fill="#0b8fa3" stroke="#fff" strokeWidth={1.5} />}
+                  <rect width={W} height={H} rx={11} 
+                    fill={notAssessed ? 'rgba(25, 39, 51, 0.85)' : fill} 
+                    stroke={blocked ? '#FF8A24' : notAssessed ? 'rgba(210, 225, 235, 0.25)' : 'rgba(255,255,255,0.3)'} 
+                    strokeWidth={blocked ? 2.5 : 1.2} 
+                    strokeDasharray={blocked ? '5 3' : undefined} 
+                    style={{ filter: blocked ? 'drop-shadow(0 0 6px rgba(255,138,36,0.35))' : undefined }}
+                  />
+                  <text x={10} y={19} fontSize={11.5} fontWeight={700} fill="#FFFFFF">{n.name.length > 24 ? n.name.slice(0, 23) + '…' : n.name}</text>
+                  <text x={10} y={35} fontSize={10} fill="rgba(225, 235, 240, 0.80)">{n.level === 'not_assessed' ? 'not assessed' : `${Math.round(n.p * 100)}% · ${n.level}`}</text>
+                  {n.flags.includes('misconception') && <g><circle cx={W - 12} cy={12} r={8} fill="#A855F7" stroke="#fff" strokeWidth={1.5} /><text x={W - 12} y={16} fontSize={11} fontWeight={800} fill="#fff" textAnchor="middle">!</text></g>}
+                  {n.flags.includes('due_for_review') && <circle cx={W - 12} cy={H - 11} r={5} fill="#4D9DFF" stroke="#fff" strokeWidth={1.5} />}
                 </g>
               )
             })}
           </g>
         </svg>
       </div>
-      <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-2.5 text-xs text-muted font-semibold">
+      <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3 text-xs text-slate-300 font-semibold desc-glow">
         {Object.entries({ 'Not assessed': 'not_assessed', 'Needs work': 'unknown', Developing: 'developing', Proficient: 'proficient', Mastered: 'mastered' }).map(([l, k]) => (
-          <span key={k} className="inline-flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded" style={{ background: k === 'not_assessed' ? '#fff' : LEVEL_FILL[k], border: '1.5px solid ' + LEVEL_FILL[k] }} />{l}</span>
+          <span key={k} className="inline-flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded" style={{ background: LEVEL_FILL[k], border: '1px solid rgba(255,255,255,0.2)' }} />{l}</span>
         ))}
-        <span className="inline-flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded border-2 border-dashed border-saffron" />Blocked by a weak prerequisite</span>
-        <span className="inline-flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-violet" />Misconception</span>
-        <span className="inline-flex items-center gap-1.5"><span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: '#0b8fa3' }} />Review due</span>
+        <span className="inline-flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded border-2 border-dashed border-[#FF8A24]" />Blocked</span>
+        <span className="inline-flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-[#A855F7]" />Misconception</span>
+        <span className="inline-flex items-center gap-1.5"><span className="inline-block h-2.5 w-2.5 rounded-full bg-[#4D9DFF]" />Review due</span>
       </div>
       <span className="sr-only">{depth.size} concepts</span>
     </div>

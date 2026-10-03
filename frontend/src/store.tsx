@@ -45,7 +45,7 @@ const DICT: Record<string, Record<Lang, string>> = {
   practice: { english: 'Practice SQL', hindi: 'SQL अभ्यास', hinglish: 'SQL Abhyaas' },
   roadmap: { english: 'Roadmap', hindi: 'रोडमैप', hinglish: 'Roadmap' },
   genome: { english: 'My Genome', hindi: 'मेरा जीनोम', hinglish: 'Mera Genome' },
-  mentors: { english: 'Chhatrachhaya', hindi: 'छत्रछाया', hinglish: 'Chhatrachhaya' },
+  mentors: { english: 'SAKHA', hindi: 'सखा', hinglish: 'SAKHA' },
   interview: { english: 'Interview', hindi: 'इंटरव्यू', hinglish: 'Interview' },
   teacher: { english: 'Class view', hindi: 'कक्षा व्यू', hinglish: 'Class view' },
   stuck: { english: "I'm stuck", hindi: 'मैं अटक गया', hinglish: 'Main atak gaya' },

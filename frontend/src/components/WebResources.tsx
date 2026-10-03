@@ -29,10 +29,10 @@ export default function WebResources({ conceptId, compact = false }: { conceptId
         <ul className="space-y-2">
           {data.items.map(i => (
             <li key={i.url}>
-              <a href={i.url} target="_blank" rel="noopener noreferrer" className="block rounded-xl border border-line bg-white p-3 hover:bg-paper">
+              <a href={i.url} target="_blank" rel="noopener noreferrer" className="block rounded-xl border border-[rgba(210,225,235,0.16)] bg-[rgba(16,26,36,0.38)] p-3 hover:bg-[rgba(255,255,255,0.07)]">
                 <div className="flex items-center gap-2 text-[11px] text-muted font-semibold"><span aria-hidden>{ICON[i.kind]}</span><span>{KIND[i.kind]}</span><span>·</span><span>{i.domain}</span></div>
-                <div className="font-bold text-sm text-navy mt-0.5">{i.title}</div>
-                {!compact && i.snippet && <div className="text-xs text-muted mt-0.5 line-clamp-2">{i.snippet}</div>}
+                <div className="font-bold text-sm text-white mt-0.5">{i.title}</div>
+                {!compact && i.snippet && <div className="text-xs text-slate-300 mt-0.5 line-clamp-2">{i.snippet}</div>}
               </a>
             </li>))}
         </ul>)}

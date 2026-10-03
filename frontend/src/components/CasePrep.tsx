@@ -49,7 +49,7 @@ export function CasePrep({ caseId, status }: CasePrepProps) {
               key={l}
               onClick={() => setLang(l)}
               className={`px-2.5 py-1 rounded-lg font-bold capitalize transition ${
-                lang === l ? 'bg-white shadow-sm text-navy' : 'text-muted hover:text-navy'
+                lang === l ? 'bg-[var(--accent-orange)] text-white shadow-sm' : 'text-slate-400 hover:text-white'
               }`}
             >
               {l === 'hinglish' ? 'Hinglish' : l === 'hindi' ? 'हिंदी' : 'English'}
@@ -104,8 +104,8 @@ export function CasePrep({ caseId, status }: CasePrepProps) {
                   </div>
                   <p className="text-sm font-medium text-navy">{q.text}</p>
                   {openAnswer === idx && q.hidden_answer && (
-                    <div className="text-xs text-muted bg-white p-2 rounded-lg border border-line mt-1">
-                      <b>Concept insight:</b> {q.hidden_answer}
+                    <div className="text-xs text-slate-300 bg-black/30 p-2.5 rounded-lg border border-white/10 mt-1">
+                      <b className="text-[var(--accent-orange)]">Concept insight:</b> {q.hidden_answer}
                     </div>
                   )}
                 </div>

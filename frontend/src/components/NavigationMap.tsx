@@ -51,15 +51,15 @@ interface MapResponse {
 }
 
 const STATE_CONFIG: Record<string, { label: string; bg: string; border: string; text: string; icon: string }> = {
-  MASTERED: { label: 'Target reached', bg: 'bg-emerald-50', border: 'border-emerald-500', text: 'text-emerald-700', icon: '✓' },
-  RECOMMENDED: { label: 'Recommended Next', bg: 'bg-amber-50', border: 'border-amber-500 shadow-md ring-2 ring-amber-400', text: 'text-amber-800', icon: '⚡' },
-  DETOUR: { label: 'Active Detour', bg: 'bg-purple-50', border: 'border-purple-500 shadow-md ring-2 ring-purple-400', text: 'text-purple-800', icon: '↻' },
-  MISCONCEPTION: { label: 'Needs Remediation', bg: 'bg-rose-50', border: 'border-rose-400', text: 'text-rose-700', icon: '⚠' },
-  AVAILABLE: { label: 'Available', bg: 'bg-sky-50', border: 'border-sky-300', text: 'text-sky-700', icon: '○' },
-  IN_PROGRESS: { label: 'In Progress', bg: 'bg-indigo-50', border: 'border-indigo-400', text: 'text-indigo-700', icon: '◐' },
-  BLOCKED: { label: 'Blocked by Prerequisite', bg: 'bg-gray-100', border: 'border-gray-300 opacity-75', text: 'text-gray-500', icon: '🔒' },
-  LOCKED: { label: 'Locked', bg: 'bg-gray-50', border: 'border-gray-200 opacity-60', text: 'text-gray-400', icon: '🔒' },
-  NEEDS_REVIEW: { label: 'Review Due', bg: 'bg-orange-50', border: 'border-orange-400', text: 'text-orange-700', icon: '🔁' },
+  MASTERED: { label: 'Target reached', bg: 'bg-[rgba(53,208,127,0.10)]', border: 'border-[rgba(53,208,127,0.55)]', text: 'text-[#6EE7A8]', icon: '✓' },
+  RECOMMENDED: { label: 'Recommended Next', bg: 'bg-[rgba(255,181,46,0.12)]', border: 'border-[rgba(255,181,46,0.7)] shadow-md ring-2 ring-[rgba(255,181,46,0.35)]', text: 'text-[#FFD27A]', icon: '⚡' },
+  DETOUR: { label: 'Active Detour', bg: 'bg-[rgba(168,127,255,0.12)]', border: 'border-[rgba(168,127,255,0.6)] shadow-md ring-2 ring-[rgba(168,127,255,0.3)]', text: 'text-[#C9B3FF]', icon: '↻' },
+  MISCONCEPTION: { label: 'Needs Remediation', bg: 'bg-[rgba(255,83,100,0.12)]', border: 'border-[rgba(255,83,100,0.5)]', text: 'text-[#FF9AA5]', icon: '⚠' },
+  AVAILABLE: { label: 'Available', bg: 'bg-[rgba(77,157,255,0.10)]', border: 'border-[rgba(77,157,255,0.45)]', text: 'text-[#8EC1FF]', icon: '○' },
+  IN_PROGRESS: { label: 'In Progress', bg: 'bg-[rgba(110,120,255,0.12)]', border: 'border-[rgba(110,120,255,0.5)]', text: 'text-[#B4BAFF]', icon: '◐' },
+  BLOCKED: { label: 'Blocked by Prerequisite', bg: 'bg-[rgba(210,225,235,0.06)]', border: 'border-[rgba(210,225,235,0.18)] opacity-80', text: 'text-[#9FB0BF]', icon: '🔒' },
+  LOCKED: { label: 'Locked', bg: 'bg-[rgba(210,225,235,0.04)]', border: 'border-[rgba(210,225,235,0.12)] opacity-70', text: 'text-[#8798A8]', icon: '🔒' },
+  NEEDS_REVIEW: { label: 'Review Due', bg: 'bg-[rgba(255,138,36,0.12)]', border: 'border-[rgba(255,138,36,0.5)]', text: 'text-[#FFB070]', icon: '🔁' },
 }
 
 const READY = 0.7   // a prerequisite counts as "ready to build on" at about 70% (the same rule the backend uses to unlock)
@@ -229,7 +229,7 @@ export default function NavigationMap() {
                 <span className="text-amber-300">{mapData.goal.title}</span>
               </h2>
               
-              <div className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-lg border border-white/20">
+              <div className="flex items-center gap-1 bg-[rgba(16,26,36,0.38)]/10 px-3 py-1 rounded-lg border border-white/20">
                 <span className="text-xs text-slate-300 font-semibold">Change Goal:</span>
                 <select
                   disabled={goalSwitching}
@@ -251,7 +251,7 @@ export default function NavigationMap() {
           <div className="flex items-center gap-2 self-start lg:self-center">
             <button
               onClick={handleOpenHistory}
-              className="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-bold text-white transition flex items-center gap-1.5"
+              className="px-3 py-2 rounded-lg bg-[rgba(16,26,36,0.38)]/10 hover:bg-[rgba(16,26,36,0.38)]/20 border border-white/20 text-xs font-bold text-white transition flex items-center gap-1.5"
             >
               <span>📜 What Changed? (v{mapData.version})</span>
             </button>
@@ -266,7 +266,7 @@ export default function NavigationMap() {
 
         {/* TURN BY TURN NAVIGATION BANNER */}
         <div className="mt-4 pt-4 border-t border-white/15 grid grid-cols-1 md:grid-cols-3 gap-3">
-          <div className="bg-white/5 rounded-xl p-3 border border-white/10">
+          <div className="bg-[rgba(16,26,36,0.38)]/5 rounded-xl p-3 border border-white/10">
             <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">YOU ARE HERE</div>
             <div className="font-bold text-sm text-white mt-0.5 flex items-center gap-1.5">
               <span className="text-amber-400">📍</span>
@@ -274,7 +274,7 @@ export default function NavigationMap() {
             </div>
           </div>
 
-          <div className="bg-amber-400/20 rounded-xl p-3 border border-amber-400/40">
+          <div className="bg-amber-400/20 rounded-xl p-3 border border-[rgba(255,181,46,0.4)]">
             <div className="text-[10px] uppercase font-black text-amber-300 tracking-wider">RECOMMENDED NEXT ACTION</div>
             <div className="font-extrabold text-sm text-amber-100 mt-0.5 flex items-center gap-1.5">
               <span>⚡</span>
@@ -285,7 +285,7 @@ export default function NavigationMap() {
             )}
           </div>
 
-          <div className="bg-white/5 rounded-xl p-3 border border-white/10">
+          <div className="bg-[rgba(16,26,36,0.38)]/5 rounded-xl p-3 border border-white/10">
             <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">ROUTE STATUS</div>
             <div className="font-bold text-sm text-white mt-0.5 flex items-center gap-2">
               <span className="text-emerald-400">✓ {masteredNodes.length} target reached</span>
@@ -310,7 +310,7 @@ export default function NavigationMap() {
           )}
 
           {/* LANE 1: IMMEDIATE / FOCUS ROUTE (YOU ARE HERE & NEXT) */}
-          <section className="card p-5 space-y-4 border-2 border-amber-200/80 bg-gradient-to-b from-amber-50/40 to-white">
+          <section className="card p-5 space-y-4 border-2 border-[rgba(255,181,46,0.4)] bg-gradient-to-b from-amber-50/40 to-white">
             <div className="flex items-center justify-between border-b border-line pb-2">
               <div className="flex items-center gap-2">
                 <span className="h-3 w-3 rounded-full bg-amber-500 animate-ping" />
@@ -333,7 +333,7 @@ export default function NavigationMap() {
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="text-xs font-black px-2 py-0.5 rounded-full bg-white border shadow-sm">
+                        <span className="text-xs font-black px-2 py-0.5 rounded-full bg-[rgba(16,26,36,0.38)] border shadow-sm">
                           {conf.icon} {conf.label}
                         </span>
                         {node.nav_tag && (
@@ -355,7 +355,7 @@ export default function NavigationMap() {
                     <div className="mt-3 pt-2 border-t border-black/5 flex items-center justify-between text-xs">
                       <span className="text-muted capitalize">{node.domain}</span>
                       {node.vakh_challenge_id ? (
-                        <span className="font-bold text-purple-700 flex items-center gap-1">
+                        <span className="font-bold text-[#C9B3FF] flex items-center gap-1">
                           🏆 Vakh Challenge
                         </span>
                       ) : (
@@ -416,7 +416,7 @@ export default function NavigationMap() {
                 <h3 className="font-extrabold text-navy text-base flex items-center gap-2">
                   <span>✅ Target-reached waypoints ({masteredNodes.length})</span>
                 </h3>
-                <span className="text-xs text-emerald-600 font-bold">Transferable Knowledge Preserved</span>
+                <span className="text-xs text-[#6EE7A8] font-bold">Transferable Knowledge Preserved</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -426,13 +426,13 @@ export default function NavigationMap() {
                     <div
                       key={node.id}
                       onClick={() => setSelectedNodeId(node.id)}
-                      className={`cursor-pointer rounded-xl p-3 border border-emerald-300 bg-emerald-50/50 transition-all ${
+                      className={`cursor-pointer rounded-xl p-3 border border-emerald-300 bg-[rgba(53,208,127,0.10)]/50 transition-all ${
                         isSelected ? 'ring-2 ring-emerald-600 shadow-md' : 'hover:border-emerald-500'
                       }`}
                     >
                       <div className="flex items-center justify-between text-xs">
-                        <span className="font-bold text-emerald-700">✓ Target reached</span>
-                        <span className="font-black text-emerald-800">{Math.round(node.p * 100)}%</span>
+                        <span className="font-bold text-[#6EE7A8]">✓ Target reached</span>
+                        <span className="font-black text-[#6EE7A8]">{Math.round(node.p * 100)}%</span>
                       </div>
                       <div className="font-bold text-sm text-navy mt-1 truncate">{node.name}</div>
                     </div>
@@ -453,8 +453,8 @@ export default function NavigationMap() {
                     {selectedNode.domain}
                   </span>
                   <span className={`text-xs font-extrabold px-2 py-0.5 rounded-full ${
-                    STATE_CONFIG[selectedNode.state]?.bg || 'bg-gray-100'
-                  } ${STATE_CONFIG[selectedNode.state]?.text || 'text-gray-700'}`}>
+                    STATE_CONFIG[selectedNode.state]?.bg || 'bg-[rgba(210,225,235,0.08)]'
+                  } ${STATE_CONFIG[selectedNode.state]?.text || 'text-[#9FB0BF]'}`}>
                     {STATE_CONFIG[selectedNode.state]?.label || selectedNode.state}
                   </span>
                 </div>
@@ -482,7 +482,7 @@ export default function NavigationMap() {
                 <div className="text-xs font-black text-saffron uppercase tracking-wider flex items-center gap-1">
                   <span>🔍 WHY THIS WAYPOINT?</span>
                 </div>
-                <div className="text-xs text-navy leading-relaxed bg-amber-50/70 p-3 rounded-xl border border-amber-200">
+                <div className="text-xs text-navy leading-relaxed bg-amber-50/70 p-3 rounded-xl border border-[rgba(255,181,46,0.4)]">
                   {selectedNode.why_reason}
                 </div>
               </div>
@@ -490,14 +490,14 @@ export default function NavigationMap() {
               {/* ACTIVE MISCONCEPTIONS IF ANY */}
               {selectedNode.misconceptions && selectedNode.misconceptions.length > 0 && (
                 <div className="space-y-1">
-                  <div className="text-xs font-black text-rose-600 uppercase tracking-wider flex items-center gap-1">
+                  <div className="text-xs font-black text-[#FF9AA5] uppercase tracking-wider flex items-center gap-1">
                     <span>⚠️ IDENTIFIED MISCONCEPTION</span>
                   </div>
-                  <div className="text-xs text-rose-800 bg-rose-50 p-3 rounded-xl border border-rose-200 space-y-1">
+                  <div className="text-xs text-[#FF9AA5] bg-[rgba(255,83,100,0.12)] p-3 rounded-xl border border-[rgba(255,83,100,0.4)] space-y-1">
                     {selectedNode.misconceptions.map(m => (
                       <div key={m} className="font-semibold">• {m.replace(/_/g, ' ')}</div>
                     ))}
-                    <p className="text-[11px] text-rose-600 pt-1">
+                    <p className="text-[11px] text-[#FF9AA5] pt-1">
                       Remediation required before downstream multi-step topics can unlock.
                     </p>
                   </div>
@@ -507,7 +507,7 @@ export default function NavigationMap() {
               {/* PREREQUISITES / BLOCKERS */}
               {selectedNode.blocked_by && selectedNode.blocked_by.length > 0 && (
                 <div className="space-y-1">
-                  <div className="text-xs font-black text-gray-500 uppercase tracking-wider">
+                  <div className="text-xs font-black text-[#9FB0BF] uppercase tracking-wider">
                     BLOCKED UNTIL READY (about 70%):
                   </div>
                   <div className="flex flex-wrap gap-1.5">
@@ -524,19 +524,19 @@ export default function NavigationMap() {
               <WebResources conceptId={selectedNode.id} compact />
 
               {selectedDetail?.challenge && (
-                <div className="card p-4 bg-purple-50/60 border-2 border-purple-200 rounded-xl space-y-2.5">
+                <div className="card p-4 bg-purple-50/60 border-2 border-[rgba(168,127,255,0.4)] rounded-xl space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] uppercase font-black tracking-wider text-purple-700 flex items-center gap-1">
+                    <span className="text-[10px] uppercase font-black tracking-wider text-[#C9B3FF] flex items-center gap-1">
                       <span>🏆 VAKH PRACTICAL BUILD</span>
                     </span>
-                    <span className="text-[10px] bg-purple-200 text-purple-900 font-bold px-1.5 py-0.5 rounded">
+                    <span className="text-[10px] bg-purple-200 text-[#C9B3FF] font-bold px-1.5 py-0.5 rounded">
                       PRACTICAL BUILD
                     </span>
                   </div>
                   <h4 className="font-extrabold text-navy text-sm">
                     {selectedDetail.challenge.title}
                   </h4>
-                  <p className="text-xs text-slate-700 line-clamp-3">
+                  <p className="text-xs text-slate-200 line-clamp-3">
                     {selectedDetail.challenge.description}
                   </p>
                   <button
@@ -545,7 +545,7 @@ export default function NavigationMap() {
                   >
                     <span>🚀 Launch Challenge on Vakh</span>
                   </button>
-                  <p className="text-[10px] text-center text-purple-600">
+                  <p className="text-[10px] text-center text-[#C9B3FF]">
                     When you submit your build on Vakh and it is reviewed, the review counts as evidence of what you can do.
                   </p>
                 </div>
@@ -581,7 +581,7 @@ export default function NavigationMap() {
       {/* HISTORY MODAL / DRAWER */}
       {showHistory && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] flex flex-col shadow-2xl overflow-hidden">
+          <div className="bg-[rgba(16,26,36,0.38)] rounded-2xl max-w-lg w-full max-h-[80vh] flex flex-col shadow-2xl overflow-hidden">
             <div className="p-4 border-b border-line flex items-center justify-between">
               <div>
                 <h3 className="font-black text-navy text-base">Route Version History</h3>

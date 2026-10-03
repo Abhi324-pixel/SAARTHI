@@ -21,9 +21,9 @@ export default function GuardianAsk({ consent, onChange }: { consent: any; onCha
 
   return (
     <div className="mt-3 space-y-2 text-sm">
-      {waiting && <div className="rounded-lg bg-white/70 p-2.5"><b>Waiting for your guardian</b> — we e-mailed {r?.masked_email}. They only need to open the link and tap Approve. You can send it again to a different address below.</div>}
-      {r?.status === 'declined' && <div className="rounded-lg bg-white/70 p-2.5">Your guardian chose not to approve mentor sessions. You can still use every learning feature.</div>}
-      {r?.status === 'withdrawn' && <div className="rounded-lg bg-white/70 p-2.5">Your guardian withdrew their approval. Open cases are paused.</div>}
+      {waiting && <div className="rounded-xl bg-white/10 text-white border border-white/10 p-3 leading-relaxed"><b>Waiting for your guardian</b> — we e-mailed {r?.masked_email}. They only need to open the link and tap Approve. You can send it again to a different address below.</div>}
+      {r?.status === 'declined' && <div className="rounded-xl bg-red-500/15 text-red-200 border border-red-500/30 p-3 leading-relaxed">Your guardian chose not to approve mentor sessions. You can still use every learning feature.</div>}
+      {r?.status === 'withdrawn' && <div className="rounded-xl bg-amber-500/15 text-amber-200 border border-amber-500/30 p-3 leading-relaxed">Your guardian withdrew their approval. Open cases are paused.</div>}
       <form onSubmit={send} className="flex flex-wrap items-end gap-2">
         <label className="font-semibold">Parent or guardian's e-mail
           <input className="input mt-1 w-64" type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="parent@example.com" autoComplete="off" />

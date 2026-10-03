@@ -37,14 +37,14 @@ export default function MentorApply() {
   }
   const toggle = (key: 'expertise' | 'languages', v: string) => setForm((f: any) => ({ ...f, [key]: f[key].includes(v) ? f[key].filter((x: string) => x !== v) : [...f[key], v] }))
 
-  if (off) return <div className="max-w-2xl mx-auto"><Callout tone="navy" title="Not available in demo mode">Mentor sign-up is only switched on with real mentors. <Link className="underline font-bold" to="/mentors">Back to Chhatrachhaya</Link></Callout></div>
+  if (off) return <div className="max-w-2xl mx-auto"><Callout tone="navy" title="Not available in demo mode">Mentor sign-up is only switched on with real mentors. <Link className="underline font-bold" to="/mentors">Back to SAKHA</Link></Callout></div>
   if (!data) return <div className="py-16 flex justify-center"><Spinner /></div>
   const a = data.application
   const locked = a && !['draft', 'needs_info'].includes(a.status)
 
   return (
     <div className="max-w-3xl mx-auto space-y-5">
-      <div><div className="eyebrow">Chhatrachhaya</div><h1 className="h-page">Become a mentor</h1>
+      <div><div className="eyebrow">SAKHA</div><h1 className="h-page">Become a mentor</h1>
         <p className="text-muted mt-1">Tell us about yourself, answer a short screen, and accept the code of conduct. A person on the SAARTHI safeguarding team reviews every application and decides — nothing is verified automatically.</p></div>
 
       {a && <Callout tone={a.status === 'approved' ? 'teal' : a.status === 'rejected' ? 'red' : 'saffron'} title={STATUS_TEXT[a.status]}>{a.reviewer_note || (a.status === 'submitted' ? 'You will see the decision here.' : '')}</Callout>}

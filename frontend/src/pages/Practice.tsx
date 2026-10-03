@@ -23,28 +23,55 @@ export default function Practice() {
     return Object.entries(g)
   }, [tasks])
 
-  if (!tasks) return <div className="py-16 flex justify-center"><Spinner /></div>
+  if (!tasks) return <div className="py-20 flex justify-center"><Spinner label="Loading SQL practice workbench…" /></div>
   const task = tasks.find(t => t.id === sel) ?? null
 
   return (
-    <div className="grid lg:grid-cols-[300px_1fr] gap-5">
-      <aside className="card p-3 h-fit lg:sticky lg:top-20 max-h-[80vh] overflow-auto">
+    <div className="grid lg:grid-cols-12 gap-5">
+      <aside className="lg:col-span-4 card p-4 h-fit lg:sticky lg:top-20 max-h-[82vh] overflow-auto">
         <div className="eyebrow px-2 pt-1">SQL practice</div>
-        <button onClick={() => { setSel(null); setParams({}) }} className={`w-full text-left rounded-lg px-3 py-2 text-sm font-bold mt-1 ${!sel ? 'bg-navy text-white' : 'hover:bg-paper text-navy'}`}>✎ Free playground</button>
+        <button 
+          onClick={() => { setSel(null); setParams({}) }} 
+          className={`w-full text-left rounded-xl px-3.5 py-2.5 text-sm font-bold mt-2 transition-all ${
+            !sel 
+              ? 'bg-[rgba(255,138,36,0.18)] text-white border border-[rgba(255,138,36,0.35)] shadow-[0_0_12px_rgba(255,138,36,0.2)]' 
+              : 'hover:bg-[rgba(255,255,255,0.06)] text-slate-300'
+          }`}
+        >
+          ✎ Free SQL playground
+        </button>
         {groups.map(([cid, list]) => (
-          <div key={cid} className="mt-3">
-            <div className="px-2 flex items-center gap-2 text-xs font-extrabold text-muted uppercase tracking-wide">{nodes[cid]?.name ?? cid} {nodes[cid] && <LevelChip level={nodes[cid].level} />}</div>
+          <div key={cid} className="mt-4 pt-3 border-t border-[rgba(210,225,235,0.10)]">
+            <div className="px-2 flex items-center justify-between text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">
+              <span className="truncate">{nodes[cid]?.name ?? cid}</span>
+              {nodes[cid] && <LevelChip level={nodes[cid].level} />}
+            </div>
             {list.map((t, i) => (
-              <button key={t.id} onClick={() => { setSel(t.id); setParams({ task: t.id }) }} className={`w-full text-left rounded-lg px-3 py-2 text-sm mt-1 ${sel === t.id ? 'bg-saffron-soft ring-1 ring-saffron font-bold' : 'hover:bg-paper'}`}>
-                <span className="text-muted mr-1.5">{i + 1}.</span>{t.prompt.length > 70 ? t.prompt.slice(0, 68) + '…' : t.prompt}
+              <button 
+                key={t.id} 
+                onClick={() => { setSel(t.id); setParams({ task: t.id }) }} 
+                className={`w-full text-left rounded-xl px-3.5 py-2 text-sm mt-1 transition-all ${
+                  sel === t.id 
+                    ? 'bg-[rgba(255,138,36,0.18)] text-white border border-[rgba(255,138,36,0.35)] shadow-[0_0_12px_rgba(255,138,36,0.2)] font-bold' 
+                    : 'hover:bg-[rgba(255,255,255,0.05)] text-slate-300'
+                }`}
+              >
+                <span className="text-[#FF8A24] font-mono mr-1.5">{i + 1}.</span>
+                {t.prompt.length > 65 ? t.prompt.slice(0, 63) + '…' : t.prompt}
               </button>
             ))}
           </div>
         ))}
       </aside>
-      <div className="min-w-0">
-        <div className="mb-3"><h1 className="h-page">{task ? nodes[task.concept_id]?.name : 'SQL playground'}</h1>
-          <p className="text-muted text-sm mt-1">{task ? 'Your query is run against a safe practice database and compared with the expected result. Wrong results are matched to specific misconceptions.' : 'Run any SELECT query on the shop database. Nothing here is graded.'}</p></div>
+      <div className="lg:col-span-8 min-w-0 space-y-4">
+        <div className="card p-5 lg:p-6">
+          <h1 className="h-page">{task ? nodes[task.concept_id]?.name : 'SQL playground'}</h1>
+          <p className="text-slate-300 desc-glow text-sm mt-1.5 leading-relaxed">
+            {task 
+              ? 'Your query is run against a safe practice database and compared with the expected result. Wrong results are matched to specific misconceptions.' 
+              : 'Run any SELECT query on the shop database. Nothing here is graded.'}
+          </p>
+        </div>
         <SqlWorkbench task={task} />
       </div>
     </div>

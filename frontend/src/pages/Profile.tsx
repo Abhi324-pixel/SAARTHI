@@ -381,7 +381,7 @@ export default function Profile() {
           <div className="rounded-xl border border-line p-3.5 bg-paper/50">
             <div className="text-2xl font-black text-navy">{stats.mentor_cases_closed}</div>
             <div className="text-xs font-bold text-muted mt-1">Mentor Cases Closed</div>
-            <div className="text-[11px] text-muted mt-0.5">Chhatrachhaya sessions</div>
+            <div className="text-[11px] text-muted mt-0.5">SAKHA sessions</div>
           </div>
 
           {stats.streak ? (
@@ -438,7 +438,7 @@ export default function Profile() {
             Mentor Visibility & Case Reports
           </div>
           <p className="text-xs text-muted">
-            When you open a case in Chhatrachhaya, the matched mentor receives an automated briefing so you never have to repeat yourself. Here is exactly what is disclosed versus kept private:
+            When you open a case in SAKHA, the matched mentor receives an automated briefing so you never have to repeat yourself. Here is exactly what is disclosed versus kept private:
           </p>
 
           <div className="grid sm:grid-cols-2 gap-4 text-xs">

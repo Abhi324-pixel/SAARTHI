@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Bell } from 'lucide-react'
 import { apiC05 } from '../api_ext/C05'
 import { refreshNotifications, useNotifications } from '../hooks/useNotifications'
 import { useApp } from '../store'
@@ -38,22 +39,68 @@ export default function NotificationBell() {
 
   return (
     <div className="relative" ref={box}>
-      <button className="relative btn btn-sm" style={{ background: 'rgba(255,255,255,.12)', color: '#fff' }} aria-label={`${t('notifications')}${s.unread ? `, ${s.unread} unread` : ''}`} aria-expanded={open} onClick={() => setOpen(o => !o)}>
-        🔔{s.unread > 0 && <span className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full bg-saffron text-white text-[10px] font-extrabold flex items-center justify-center">{s.unread > 99 ? '99+' : s.unread}</span>}
+      <button
+        className="relative btn btn-sm p-2 rounded-xl flex items-center justify-center border border-white/10 hover:border-white/20 transition-all cursor-pointer"
+        style={{ background: 'rgba(255,255,255,.12)', color: '#fff' }}
+        aria-label={`${t('notifications')}${s.unread ? `, ${s.unread} unread` : ''}`}
+        aria-expanded={open}
+        onClick={() => setOpen(o => !o)}
+      >
+        <Bell className="w-4 h-4 text-amber-400" />
+        {s.unread > 0 && (
+          <span className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full bg-[var(--accent-orange)] text-white text-[10px] font-extrabold flex items-center justify-center shadow-[0_2px_8px_rgba(255,138,36,0.6)]">
+            {s.unread > 99 ? '99+' : s.unread}
+          </span>
+        )}
       </button>
       {open && (
-        <div className="absolute right-0 mt-2 w-80 max-w-[90vw] bg-white text-ink rounded-2xl shadow-2xl border border-line z-50 overflow-hidden" role="dialog" aria-label={t('notifications')}>
-          <div className="flex items-center justify-between px-4 py-2.5 border-b border-line"><b className="text-navy">{t('notifications')}</b>{s.unread > 0 && <button className="text-xs underline text-teal font-semibold" onClick={readAll}>{t('mark_all_read')}</button>}</div>
-          <div className="max-h-96 overflow-auto">
-            {items === null && <div className="p-4 text-sm text-muted">…</div>}
-            {items?.length === 0 && <div className="p-4 text-sm text-muted">{t('no_notifications')}</div>}
-            {items?.map(n => (
-              <button key={n.id} onClick={() => go(n)} className={`w-full text-left px-4 py-2.5 border-b border-line last:border-0 hover:bg-paper ${n.read ? '' : 'bg-saffron-soft/60'}`}>
-                <div className={`text-sm ${n.read ? '' : 'font-bold'}`}>{t('notif.' + n.kind, n.params)}</div>
-                <div className="text-[11px] text-muted">{n.at.replace('T', ' ').slice(0, 16)}</div>
-              </button>))}
+        <div
+          className="absolute right-0 mt-2.5 w-84 max-w-[90vw] bg-[rgba(10,18,28,0.96)] backdrop-blur-2xl text-white rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.6)] border border-[rgba(210,225,235,0.18)] z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+          role="dialog"
+          aria-label={t('notifications')}
+        >
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[rgba(210,225,235,0.12)] bg-[rgba(14,24,36,0.7)]">
+            <b className="text-white text-sm font-extrabold tracking-tight heading-glow">
+              {t('notifications')}
+            </b>
+            {s.unread > 0 && (
+              <button
+                className="text-xs underline text-[#4D9DFF] hover:text-[#7ab8ff] font-semibold transition-colors cursor-pointer"
+                onClick={readAll}
+              >
+                {t('mark_all_read')}
+              </button>
+            )}
           </div>
-        </div>)}
+          <div className="max-h-96 overflow-auto divide-y divide-[rgba(210,225,235,0.08)]">
+            {items === null && (
+              <div className="p-4 text-sm text-slate-400 text-center">…</div>
+            )}
+            {items?.length === 0 && (
+              <div className="p-4 text-sm text-slate-400 text-center">{t('no_notifications')}</div>
+            )}
+            {items?.map(n => (
+              <button
+                key={n.id}
+                onClick={() => go(n)}
+                className={`w-full text-left px-4 py-3 transition-colors cursor-pointer ${
+                  n.read
+                    ? 'hover:bg-white/[0.05]'
+                    : 'bg-[rgba(255,138,36,0.12)] hover:bg-[rgba(255,138,36,0.18)] border-l-2 border-l-[#FF8A24]'
+                }`}
+              >
+                <div className={`text-sm leading-snug ${n.read ? 'text-slate-300 font-medium' : 'text-white font-bold'}`}>
+                  {t('notif.' + n.kind, n.params)}
+                </div>
+                <div className="text-[11px] text-slate-400 mt-1">
+                  {n.at.replace('T', ' ').slice(0, 16)}
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
+

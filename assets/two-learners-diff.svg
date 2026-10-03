@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="card-l1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <filter id="learner-shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="440" rx="14" fill="#090d17" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Title Header -->
+  <text x="50" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="900" fill="#ffffff">
+    Same Destination, Different Routes: Genuine Dynamic Adaptivity
+  </text>
+  <text x="50" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#94a3b8">
+    Both learners choose "Backend Developer". The route dynamically emerges from their authentic BKT mastery vectors.
+  </text>
+
+  <!-- COMMON TARGET DESTINATION BANNER -->
+  <g transform="translate(50, 90)">
+    <rect width="1000" height="38" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" />
+    <circle cx="25" cy="19" r="10" fill="#f59e0b" fill-opacity="0.2" />
+    <text x="25" y="24" font-family="Arial" font-size="13" text-anchor="middle" fill="#f59e0b">🎯</text>
+    <text x="45" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="800" fill="#ffffff">
+      Common Goal: <tspan fill="#f59e0b">Python Backend Developer</tspan>
+    </text>
+    <text x="580" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94a3b8">
+      Required Competencies: Python (70%), SQL (70%), HTTP/REST (70%)
+    </text>
+  </g>
+
+  <!-- LEARNER A (LEFT) -->
+  <g transform="translate(50, 145)" filter="url(#learner-shadow)">
+    <rect width="485" height="260" rx="12" fill="url(#card-l1)" stroke="#38bdf8" stroke-width="1.5" />
+    
+    <!-- Profile header -->
+    <rect x="0" y="0" width="485" height="36" rx="12" fill="#0284c7" fill-opacity="0.2" />
+    <text x="18" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#38bdf8">
+      Learner A (Experienced Data Analyst 전환)
+    </text>
+
+    <!-- State Breakdown -->
+    <g transform="translate(18, 48)">
+      <text x="0" y="14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#94a3b8">BKT Mastery Vector:</text>
+      <text x="140" y="14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#10b981">Python: 90% (Mastered)</text>
+      <text x="290" y="14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#10b981">SQL: 80% (Mastered)</text>
+      <text x="140" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#ef4444" font-weight="700">HTTP &amp; REST: 30% (Critical Gap)</text>
+    </g>
+
+    <!-- Generated Route Flow -->
+    <g transform="translate(18, 100)">
+      <rect x="0" y="0" width="449" height="135" rx="8" fill="#0f172a" stroke="#334155" />
+      <text x="14" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" fill="#f59e0b">
+        GENERATED NAVIGATION ROUTE:
+      </text>
+
+      <!-- Step 1: Skipped / Mastered -->
+      <g transform="translate(14, 34)">
+        <rect x="0" y="0" width="125" height="32" rx="6" fill="#065f46" fill-opacity="0.5" stroke="#10b981" />
+        <text x="10" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" fill="#a7f3d0">Python &amp; SQL</text>
+        <text x="10" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#6ee7b7">✓ SKIPPED (Already &gt;70%)</text>
+      </g>
+
+      <!-- Arrow -->
+      <text x="148" y="54" font-family="Arial" font-size="14" fill="#38bdf8">→</text>
+
+      <!-- Step 2: Next Action -->
+      <g transform="translate(170, 34)">
+        <rect x="0" y="0" width="125" height="32" rx="6" fill="#78350f" fill-opacity="0.6" stroke="#f59e0b" />
+        <text x="10" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="800" fill="#fde68a">HTTP Protocol</text>
+        <text x="10" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#fcd34d">⚡ RECOMMENDED NEXT</text>
+      </g>
+
+      <!-- Arrow -->
+      <text x="304" y="54" font-family="Arial" font-size="14" fill="#38bdf8">→</text>
+
+      <!-- Step 3: Fast Track to API Project -->
+      <g transform="translate(325, 34)">
+        <rect x="0" y="0" width="110" height="32" rx="6" fill="#1e1b4b" stroke="#8b5cf6" />
+        <text x="10" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" fill="#c084fc">FastAPI + Vakh</text>
+        <text x="10" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#a855f7">🏆 Practical Build</text>
+      </g>
+
+      <text x="14" y="95" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#e2e8f0">
+        <tspan font-weight="700" fill="#38bdf8">Route Time Estimate:</tspan> 2.5 weeks (High velocity focus)
+      </text>
+      <text x="14" y="112" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#94a3b8">
+        Learner A does not waste time re-studying basics they already know.
+      </text>
+    </g>
+  </g>
+
+  <!-- LEARNER B (RIGHT) -->
+  <g transform="translate(565, 145)" filter="url(#learner-shadow)">
+    <rect width="485" height="260" rx="12" fill="url(#card-l1)" stroke="#ec4899" stroke-width="1.5" />
+    
+    <!-- Profile header -->
+    <rect x="0" y="0" width="485" height="36" rx="12" fill="#be185d" fill-opacity="0.2" />
+    <text x="18" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#f472b6">
+      Learner B (Junior Frontend Dev 전환)
+    </text>
+
+    <!-- State Breakdown -->
+    <g transform="translate(18, 48)">
+      <text x="0" y="14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#94a3b8">BKT Mastery Vector:</text>
+      <text x="140" y="14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#10b981">HTTP &amp; Web: 70% (Mastered)</text>
+      <text x="140" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#ef4444" font-weight="700">Python: 45% (Unmastered)</text>
+      <text x="290" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#ef4444" font-weight="700">SQL: 20% (Missing Prereq)</text>
+    </g>
+
+    <!-- Generated Route Flow -->
+    <g transform="translate(18, 100)">
+      <rect x="0" y="0" width="449" height="135" rx="8" fill="#0f172a" stroke="#334155" />
+      <text x="14" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" fill="#f59e0b">
+        GENERATED NAVIGATION ROUTE:
+      </text>
+
+      <!-- Step 1: Foundations -->
+      <g transform="translate(14, 34)">
+        <rect x="0" y="0" width="125" height="32" rx="6" fill="#78350f" fill-opacity="0.6" stroke="#f59e0b" />
+        <text x="10" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="800" fill="#fde68a">Python Basics</text>
+        <text x="10" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#fcd34d">⚡ RECOMMENDED NEXT</text>
+      </g>
+
+      <!-- Arrow -->
+      <text x="148" y="54" font-family="Arial" font-size="14" fill="#ec4899">→</text>
+
+      <!-- Step 2: SQL Foundations -->
+      <g transform="translate(170, 34)">
+        <rect x="0" y="0" width="125" height="32" rx="6" fill="#1e293b" stroke="#64748b" />
+        <text x="10" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" fill="#cbd5e1">SQL SELECT / JOIN</text>
+        <text x="10" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#94a3b8">🔒 BLOCKED UNTIL PY</text>
+      </g>
+
+      <!-- Arrow -->
+      <text x="304" y="54" font-family="Arial" font-size="14" fill="#ec4899">→</text>
+
+      <!-- Step 3: Vakh Project -->
+      <g transform="translate(325, 34)">
+        <rect x="0" y="0" width="110" height="32" rx="6" fill="#1e1b4b" stroke="#8b5cf6" />
+        <text x="10" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" fill="#c084fc">Database ORM</text>
+        <text x="10" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#a855f7">🏆 Vakh Capstone</text>
+      </g>
+
+      <text x="14" y="95" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#e2e8f0">
+        <tspan font-weight="700" fill="#f472b6">Route Time Estimate:</tspan> 6.0 weeks (Foundation building)
+      </text>
+      <text x="14" y="112" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#94a3b8">
+        Learner B receives necessary prerequisite scaffolding before advanced builds.
+      </text>
+    </g>
+  </g>
+</svg>

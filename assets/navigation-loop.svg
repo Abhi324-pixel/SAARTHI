@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="480" rx="14" fill="#0b1120" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Title Header -->
+  <text x="50" y="45" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="900" fill="#ffffff">
+    The Continuous Self-Generating Navigation Loop
+  </text>
+  <text x="50" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#94a3b8">
+    How learner evidence deterministically computes your next learning coordinates
+  </text>
+
+  <!-- ROW 1: 1. Goal -> 2. Diagnostic -> 3. Learner Twin -> 4. Knowledge Graph -->
+  <!-- 1. Destination Goal -->
+  <g transform="translate(50, 105)" filter="url(#shadow)">
+    <rect width="210" height="90" rx="10" fill="url(#card-grad)" stroke="#f59e0b" stroke-width="2" />
+    <circle cx="28" cy="28" r="14" fill="#f59e0b" fill-opacity="0.2" />
+    <text x="28" y="34" font-family="Arial" font-size="16" text-anchor="middle" fill="#f59e0b">🎯</text>
+    <text x="52" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#f8fafc">1. Learner Destination</text>
+    <text x="18" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94a3b8">"Backend Developer", "ML Eng"</text>
+    <text x="18" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#64748b">Sets target competencies</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <line x1="260" y1="150" x2="305" y2="150" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <!-- 2. Diagnostic & Probes -->
+  <g transform="translate(315, 105)" filter="url(#shadow)">
+    <rect width="210" height="90" rx="10" fill="url(#card-grad)" stroke="#38bdf8" stroke-width="1.5" />
+    <circle cx="28" cy="28" r="14" fill="#38bdf8" fill-opacity="0.2" />
+    <text x="28" y="34" font-family="Arial" font-size="16" text-anchor="middle" fill="#38bdf8">🔍</text>
+    <text x="52" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#f8fafc">2. Diagnostic Engine</text>
+    <text x="18" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94a3b8">Placement checks &amp; probes</text>
+    <text x="18" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#64748b">Identifies knowns &amp; unknowns</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <line x1="525" y1="150" x2="570" y2="150" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow-cyan)" />
+
+  <!-- 3. Learner Twin (BKT) -->
+  <g transform="translate(580, 105)" filter="url(#shadow)">
+    <rect width="210" height="90" rx="10" fill="url(#card-grad)" stroke="#10b981" stroke-width="2" />
+    <circle cx="28" cy="28" r="14" fill="#10b981" fill-opacity="0.2" />
+    <text x="28" y="34" font-family="Arial" font-size="16" text-anchor="middle" fill="#10b981">🧠</text>
+    <text x="52" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#f8fafc">3. Learner Twin (BKT)</text>
+    <text x="18" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94a3b8">Posterior mastery P(L) probabilities</text>
+    <text x="18" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#10b981">Source of truth for mastery</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <line x1="790" y1="150" x2="835" y2="150" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow-cyan)" />
+
+  <!-- 4. Multi-Relational Graph -->
+  <g transform="translate(845, 105)" filter="url(#shadow)">
+    <rect width="205" height="90" rx="10" fill="url(#card-grad)" stroke="#6366f1" stroke-width="1.5" />
+    <circle cx="28" cy="28" r="14" fill="#6366f1" fill-opacity="0.2" />
+    <text x="28" y="34" font-family="Arial" font-size="16" text-anchor="middle" fill="#6366f1">🕸️</text>
+    <text x="52" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#f8fafc">4. Knowledge Graph</text>
+    <text x="18" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94a3b8">PREREQUISITE, BUILDS_ON</text>
+    <text x="18" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#64748b">Persistent topological nodes</text>
+  </g>
+
+  <!-- Curve: 4 down to Row 2 right -->
+  <path d="M 945 195 L 945 235 Q 945 255, 925 255 L 870 255" fill="none" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- ROW 2: (Right to Left) 5. Gap & Prereq -> 6. Dynamic Route -> 7. Practice & Vakh -> 8. Evidence Event -->
+  <!-- 5. Gap & Prereq Analysis -->
+  <g transform="translate(655, 230)" filter="url(#shadow)">
+    <rect width="210" height="90" rx="10" fill="url(#card-grad)" stroke="#f43f5e" stroke-width="1.5" />
+    <circle cx="28" cy="28" r="14" fill="#f43f5e" fill-opacity="0.2" />
+    <text x="28" y="34" font-family="Arial" font-size="16" text-anchor="middle" fill="#f43f5e">⚖️</text>
+    <text x="52" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#f8fafc">5. Gap &amp; Prereq Engine</text>
+    <text x="18" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94a3b8">Compares BKT vs. Goal</text>
+    <text x="18" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#f43f5e">Detects misconceptions &amp; detours</text>
+  </g>
+
+  <!-- Arrow 5 -> 6 -->
+  <line x1="655" y1="275" x2="610" y2="275" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <!-- 6. Dynamic Route Generation -->
+  <g transform="translate(390, 230)" filter="url(#shadow)">
+    <rect width="210" height="90" rx="10" fill="url(#card-grad)" stroke="#f59e0b" stroke-width="2" />
+    <circle cx="28" cy="28" r="14" fill="#f59e0b" fill-opacity="0.2" />
+    <text x="28" y="34" font-family="Arial" font-size="16" text-anchor="middle" fill="#f59e0b">🧭</text>
+    <text x="52" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#f8fafc">6. Dynamic Navigation</text>
+    <text x="18" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#f59e0b">"YOU ARE HERE" &amp; "NEXT"</text>
+    <text x="18" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#64748b">Route version incremented (vN)</text>
+  </g>
+
+  <!-- Arrow 6 -> 7 -->
+  <line x1="390" y1="275" x2="345" y2="275" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrow-purple)" />
+
+  <!-- 7. Vakh Build & Practice -->
+  <g transform="translate(125, 230)" filter="url(#shadow)">
+    <rect width="210" height="90" rx="10" fill="url(#card-grad)" stroke="#a855f7" stroke-width="2" />
+    <circle cx="28" cy="28" r="14" fill="#a855f7" fill-opacity="0.2" />
+    <text x="28" y="34" font-family="Arial" font-size="16" text-anchor="middle" fill="#a855f7">🏆</text>
+    <text x="52" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#c084fc">7. Practical Vakh Build</text>
+    <text x="18" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94a3b8">Deep-link launch &amp; real work</text>
+    <text x="18" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#a855f7">Verified submission reviews</text>
+  </g>
+
+  <!-- Curve: 7 down to Row 3 -->
+  <path d="M 230 320 L 230 365 Q 230 385, 250 385 L 300 385" fill="none" stroke="#a855f7" stroke-width="2" marker-end="url(#arrow-cyan)" />
+
+  <!-- ROW 3: (Left to Right) 8. Evidence Event -> 9. BKT Mastery Update -> 10. Map Regeneration -->
+  <!-- 8. Immutable Evidence Event -->
+  <g transform="translate(310, 355)" filter="url(#shadow)">
+    <rect width="230" height="85" rx="10" fill="url(#card-grad)" stroke="#06b6d4" stroke-width="1.5" />
+    <circle cx="28" cy="28" r="14" fill="#06b6d4" fill-opacity="0.2" />
+    <text x="28" y="34" font-family="Arial" font-size="16" text-anchor="middle" fill="#06b6d4">📄</text>
+    <text x="52" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="800" fill="#f8fafc">8. Immutable Evidence</text>
+    <text x="18" y="54" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94a3b8">source_type="work_product"</text>
+    <text x="18" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#06b6d4">vakh_post_id idempotency guard</text>
+  </g>
+
+  <!-- Arrow 8 -> 9 -->
+  <line x1="540" y1="397" x2="585" y2="397" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow-cyan)" />
+
+  <!-- 9. Mastery Posterior Update -->
+  <g transform="translate(595, 355)" filter="url(#shadow)">
+    <rect width="220" height="85" rx="10" fill="url(#card-grad)" stroke="#10b981" stroke-width="2" />
+    <circle cx="28" cy="28" r="14" fill="#10b981" fill-opacity="0.2" />
+    <text x="28" y="34" font-family="Arial" font-size="16" text-anchor="middle" fill="#10b981">📈</text>
+    <text x="52" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="800" fill="#f8fafc">9. BKT Mastery Recalc</text>
+    <text x="18" y="54" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94a3b8">Updates P(L_t+1) in database</text>
+    <text x="18" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#10b981">Crosses 0.70 threshold $\to$ Unlocks</text>
+  </g>
+
+  <!-- Loopback: 9 back to 6 / 3 -->
+  <path d="M 815 397 L 880 397 Q 900 397, 900 377 L 900 240 Q 900 220, 880 220 L 610 220" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)" />
+  <text x="910" y="315" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#10b981">
+    Auto-Regeneration Trigger
+  </text>
+</svg>

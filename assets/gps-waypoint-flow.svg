@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="card-nav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <filter id="node-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="420" rx="14" fill="#090d16" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Section Title -->
+  <text x="50" y="45" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="900" fill="#ffffff">
+    GPS Waypoint Navigation States ("Google Maps for Learning")
+  </text>
+  <text x="50" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#94a3b8">
+    Computed live from the knowledge graph and learner's BKT probability vector
+  </text>
+
+  <!-- ROADWAY / PATHWAY SVG LINE -->
+  <path d="M 120 180 C 260 180, 260 180, 360 180 C 470 180, 500 290, 620 290 C 720 290, 750 180, 850 180 L 980 180" 
+        fill="none" stroke="#334155" stroke-width="8" stroke-linecap="round" />
+  <path d="M 120 180 C 260 180, 260 180, 360 180 C 470 180, 500 290, 620 290 C 720 290, 750 180, 850 180 L 980 180" 
+        fill="none" stroke="#f59e0b" stroke-width="3" stroke-dasharray="8,8" />
+
+  <!-- Detour loop bypass -->
+  <path d="M 360 180 C 440 80, 560 80, 620 180" fill="none" stroke="#a855f7" stroke-width="3" stroke-dasharray="6,4" />
+
+  <!-- WAYPOINT 1: MASTERED ("YOU WERE HERE") -->
+  <g transform="translate(40, 125)" filter="url(#node-shadow)">
+    <rect width="170" height="110" rx="12" fill="url(#card-nav)" stroke="#10b981" stroke-width="2" />
+    <rect x="12" y="12" width="85" height="20" rx="4" fill="#065f46" />
+    <text x="54" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="800" fill="#34d399" text-anchor="middle">✓ MASTERED</text>
+    <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#f8fafc">SQL SELECT</text>
+    <text x="12" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94a3b8">BKT Mastery: 92%</text>
+    <!-- Progress bar -->
+    <rect x="12" y="85" width="146" height="6" rx="3" fill="#334155" />
+    <rect x="12" y="85" width="134" height="6" rx="3" fill="#10b981" />
+  </g>
+
+  <!-- WAYPOINT 2: YOU ARE HERE / RECOMMENDED NEXT -->
+  <g transform="translate(265, 120)" filter="url(#node-shadow)">
+    <rect width="195" height="120" rx="12" fill="url(#card-nav)" stroke="#f59e0b" stroke-width="2.5" />
+    <rect x="12" y="12" width="135" height="20" rx="4" fill="#78350f" />
+    <text x="79" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="900" fill="#fde68a" text-anchor="middle">⚡ RECOMMENDED NEXT</text>
+    <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#ffffff">SQL JOINs</text>
+    <text x="12" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#fde047">BKT Mastery: 48% (Target 70%)</text>
+    <text x="12" y="86" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#94a3b8">Action: Vakh Build Challenge</text>
+    <!-- Progress bar -->
+    <rect x="12" y="98" width="171" height="6" rx="3" fill="#334155" />
+    <rect x="12" y="98" width="82" height="6" rx="3" fill="#f59e0b" />
+  </g>
+
+  <!-- WAYPOINT 3A (DETOUR OVERLAY): ADAPTIVE DETOUR -->
+  <g transform="translate(420, 20)" filter="url(#node-shadow)">
+    <rect width="180" height="95" rx="12" fill="url(#card-nav)" stroke="#a855f7" stroke-width="2" />
+    <rect x="12" y="10" width="115" height="20" rx="4" fill="#581c87" />
+    <text x="69" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="800" fill="#e9d5ff" text-anchor="middle">↻ ADAPTIVE DETOUR</text>
+    <text x="12" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="800" fill="#f8fafc">Relational Algebra</text>
+    <text x="12" y="65" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#c084fc">Unblocks downstream JOINs</text>
+    <text x="12" y="80" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#64748b">Detected via error patterns</text>
+  </g>
+
+  <!-- WAYPOINT 3B: MISCONCEPTION REQUIRING REMEDIATION -->
+  <g transform="translate(520, 230)" filter="url(#node-shadow)">
+    <rect width="200" height="115" rx="12" fill="url(#card-nav)" stroke="#f43f5e" stroke-width="2" />
+    <rect x="12" y="12" width="125" height="20" rx="4" fill="#881337" />
+    <text x="74" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="800" fill="#fecdd3" text-anchor="middle">⚠️ MISCONCEPTION</text>
+    <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#f8fafc">LEFT vs INNER JOIN</text>
+    <text x="12" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#fca5a5">Confuses unmatched rows</text>
+    <text x="12" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#94a3b8">Targeted Vakh contrast task</text>
+  </g>
+
+  <!-- WAYPOINT 4: BLOCKED UNTIL PREREQUISITES MET -->
+  <g transform="translate(755, 125)" filter="url(#node-shadow)">
+    <rect width="175" height="110" rx="12" fill="url(#card-nav)" stroke="#475569" stroke-width="1.5" />
+    <rect x="12" y="12" width="95" height="20" rx="4" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <text x="59" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="800" fill="#94a3b8" text-anchor="middle">🔒 BLOCKED UNTIL</text>
+    <text x="12" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#94a3b8">Multi-Table JOIN</text>
+    <text x="12" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#64748b">Needs JOINs &ge; 70%</text>
+    <text x="12" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#ef4444">Locked dependency</text>
+  </g>
+
+  <!-- WAYPOINT 5: FINAL DESTINATION GOAL -->
+  <g transform="translate(950, 120)" filter="url(#node-shadow)">
+    <rect width="125" height="120" rx="12" fill="url(#card-nav)" stroke="#38bdf8" stroke-width="2" />
+    <circle cx="62" cy="45" r="22" fill="#0284c7" fill-opacity="0.2" />
+    <text x="62" y="53" font-family="Arial" font-size="24" text-anchor="middle" fill="#38bdf8">🎯</text>
+    <text x="62" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle">GOAL</text>
+    <text x="62" y="102" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" fill="#38bdf8" text-anchor="middle">Backend Dev</text>
+  </g>
+
+  <!-- Explanation Pill -->
+  <g transform="translate(50, 360)">
+    <rect width="1000" height="36" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <text x="20" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94a3b8">
+      <tspan fill="#f59e0b" font-weight="700">Deterministic Explainability:</tspan> Every transition on this map is justified by mathematical BKT bounds and graph relations, never by arbitrary LLM prompts.
+    </text>
+  </g>
+</svg>
